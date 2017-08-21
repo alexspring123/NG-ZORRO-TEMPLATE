@@ -1,6 +1,6 @@
 import { Observable } from "rxjs/Observable";
-import { Session } from "app/shared/model/session";
-import { HttpResult } from "app/shared/model/http-result";
+import { Session } from '../shared/model/session';
+import { HttpResult } from '../shared/model/http-result';
 
 /**登录服务 */
 export interface LoginService {

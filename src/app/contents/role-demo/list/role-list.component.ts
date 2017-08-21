@@ -1,10 +1,10 @@
 import { Component, OnInit, AfterViewInit, AfterViewChecked } from '@angular/core';
-import { PageFilter } from "app/shared/model/page-filter";
 import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
-import { Page } from "app/shared/model/page";
 import { Role } from "app/contents/role-demo/role";
 import { RoleService } from "app/contents/role-demo/role.service";
-import { HttpResult } from "app/shared/model/http-result";
+import { PageFilter } from "app/base/shared/model/page-filter";
+import { Page } from "app/base/shared/model/page";
+import { HttpResult } from "app/base/shared/model/http-result";
 
 export class RoleFilter extends PageFilter {
     code: string;

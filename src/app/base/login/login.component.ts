@@ -4,9 +4,11 @@ import { Router } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { LoginServiceImpl } from "app/providers/login.service-impl";
 import { loginConfig } from "config/global-config";
-import { SessionService } from "app/shared/session.service";
-import { Session } from "app/shared/model/session";
-import { HttpResult } from "app/shared/model/http-result";
+import { SessionService } from "app/base/shared/session.service";
+import { Session } from "app/base/shared/model/session";
+import { HttpResult } from "app/base/shared/model/http-result";
+
+
 @Component({
     moduleId: module.id,
     selector: 'app-login',

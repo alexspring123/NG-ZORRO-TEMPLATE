@@ -1,5 +1,4 @@
 import { Route } from "@angular/router";
-import { ContentsRoutes } from "app/contents/contents-routes";
 import { RoleListComponent } from "app/contents/role-demo/list/role-list.component";
 import { RoleComponent } from "app/contents/role-demo/role.component";
 import { app_title } from "config/global-config";

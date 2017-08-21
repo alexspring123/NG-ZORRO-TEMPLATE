@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { sessionConfig } from "config/global-config";
-import { Session } from "app/shared/model/session";
+import { Session } from "app/base/shared/model/session";
 
 @Injectable()
 export class SessionService {

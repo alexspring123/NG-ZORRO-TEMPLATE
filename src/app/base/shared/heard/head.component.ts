@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { loginConfig } from "config/global-config";
-import { Session } from "app/shared/model/session";
-import { SessionService } from "app/shared/session.service";
 import { Router } from "@angular/router";
+import { Session } from "app/base/shared/model/session";
+import { SessionService } from "app/base/shared/session.service";
+
+
 @Component({
     selector: 'app-head',
     templateUrl: './head.component.html',

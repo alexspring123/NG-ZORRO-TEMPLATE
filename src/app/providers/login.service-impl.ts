@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Observer } from "rxjs/Observer";
 import { LoginService } from "app/base/login/login.service";
-import { Session } from "app/shared/model/session";
-import { HttpResult } from "app/shared/model/http-result";
+import { Session } from "app/base/shared/model/session";
+import { HttpResult } from "app/base/shared/model/http-result";
 
 @Injectable()
 export class LoginServiceImpl implements LoginService {

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { loginConfig } from "config/global-config";
+
 @Component({
     selector: 'app-head-user',
     template: `

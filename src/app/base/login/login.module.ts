@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgZorroAntdModule } from "ng-zorro-antd";
 import { CommonModule } from "@angular/common";
 import { LoginServiceImpl } from "app/providers/login.service-impl";
-import { SessionService } from "app/shared/session.service";
+import { SessionService } from "app/base/shared/session.service";
 
 @NgModule({
     imports: [

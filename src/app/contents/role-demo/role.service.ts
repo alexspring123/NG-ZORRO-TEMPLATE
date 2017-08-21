@@ -1,12 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Observer } from "rxjs/Observer";
-
-import { HttpResult } from "app/shared/model/http-result";
-import { Page } from "app/shared/model/page";
-
 import { RoleFilter } from "app/contents/role-demo/list/role-list.component";
 import { Role } from "app/contents/role-demo/role";
+import { Page } from "app/base/shared/model/page";
+import { HttpResult } from "app/base/shared/model/http-result";
 
 
 @Injectable()
