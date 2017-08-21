@@ -109,11 +109,11 @@ export interface Session {
 # 升级模板说明
 - 下载最新的项目文件
 - 替换如下文件
-> /src/\*.html \*.ts \*.css \*.json
+> /src/\*.html \*.ts \*.css \*.json <br>
 > /src/app/base/，整个目录覆盖
 
 - 比对并合并如下文件
-> /src/config/*.*
+> /src/config/global-config.ts
 
 
 
