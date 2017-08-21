@@ -38,8 +38,8 @@ app_title | 系统名称，显示在浏览器的title中（浏览器的标签）
 
  配置项 | 说明 
  --- | ------
- background_image | 登录页面背景图片，图片一般放在/src/assets目录中
- form_title | 登录表单的标题，最好控制在8个汉字以内
+ background_image | 登录页面背景图片，图片一般放在/src/assets目录中
+ form_title | 登录表单的标题，最好控制在8个汉字以内
 
 ## 菜单配置
 所有菜单相关配置存放在配置文件menuConfig类中
@@ -53,9 +53,9 @@ placement | 取值'left'或'top'。<br>设置为'left'，菜单显示在左侧<b
 
 配置项 | 说明
 --- | ------
-store_key | 本地session存储的key<br>系统会自动将session存放在本地的localstorage中
+store_key | 本地session存储的key<br>系统会自动将session存放在本地的localstorage中
 
-# 对接自己后台登录服务
+# 对接自己后台登录服务
 目前系统严格定义了后台服务需要返回的接口格式如下：
 ```js
 /**登录服务 */
@@ -97,7 +97,7 @@ export interface Session {
 > **特别注意：**  此文件名称和位置不能更改
 
 # 目录说明
-模板项目的目录结构定义为
+模板项目的目录结构定义为
 
 目录或文件 | 用户是否可更改 | 说明
 --- | --- | ------
@@ -106,12 +106,12 @@ export interface Session {
 /src/config/ | 可以更改 | 此目录下存放的是系统配置文件，用户可以更改，但是不能删除任何文件
 /src/environments/ | 可以更改| 此目录是anguler-cli标准的环境变量文件，可以按需修改
 /src/app/base/ |  不可更改 | 存放项目的登录页面、主页面、修改密码页面、注销页面等，用户不可修改
-/src/app/providers/ | 可以修改，但是不能删除 | 存放模板定义好的接口实现，用户可以修改实现，但是不能修改文件名、类名和实现的接口
+/src/app/providers/ | 可以修改，但是不能删除 | 存放模板定义好的接口实现，用户可以修改实现，但是不能修改文件名、类名和实现的接口
 /src/app/contents/ | 可以任何修改 | 存放用户自己的模块代码，可以任意修改
 /src/app/config/ | 可以修改，但是不能删除 | 存放用户模块和路由的注册文件
 
 # 升级模板说明
-- 下载最新的项目文件
+- 下载最新的项目文件
 
 - 替换如下文件
 > /src/\*.html \*.ts \*.css \*.json <br>
