@@ -1,0 +1,20 @@
+<ul nz-menu [nzMode]="isCollapsed?'vertical':'inline'" [nzTheme]="'dark'" style="min-height:500px">
+    <div *ngFor="let menu of session.menus">
+        <li nz-menu-item *ngIf="menu.subMenus.length==0" (click)="goPage(menu.path)">
+            <i *ngIf="menu.icon" class="anticon" [ngClass]="'anticon-'+menu.icon"></i>
+            <span [ngClass]="menu.icon ?'nav-text':''">{{menu.title}}</span>
+        </li>
+
+        <li nz-submenu *ngIf="menu.subMenus.length>0">
+            <span title>
+                <i *ngIf="menu.icon" class="anticon" [ngClass]="'anticon-'+menu.icon"></i>
+                <span [ngClass]="menu.icon ?'nav-text':''">{{menu.title}}</span>
+            </span>
+            <ul>
+                <li nz-menu-item *ngFor="let subMenu of menu.subMenus" (click)="goPage(subMenu.path)">
+                    <i *ngIf="subMenu.icon" class="anticon" [ngClass]="'anticon-'+subMenu.icon"></i> {{subMenu.title}}
+                </li>
+            </ul>
+        </li>
+    </div>
+</ul>
