@@ -57,6 +57,4 @@ export class LoginComponent implements OnInit {
             },
             (error: any) => window.alert(error));
     }
-
-
 }

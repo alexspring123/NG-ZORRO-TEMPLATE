@@ -58,13 +58,32 @@ store_key | 本地session存储的key<br>系统会自动将session存放在本�
 # 对接自己后台登录服务
 目前系统严格定义了后台服务需要返回的接口格式如下：
 ```js
-/**登录服务 */
+/**预定义服务 */
 export interface LoginService {
-    login(logData: { login: string, password: string }): Observable<HttpResult<Session>>;
+    /**
+     * 登录
+     */
+    login(loginData: { login: string, password: string }): Observable<HttpResult<Session>>;
+
+    /**
+     * 注销
+     * userCode：当前登录用户代码
+     * token：当前登录的token
+     * userCode和token必须有一个不为Null。
+     * 登录后服务端会生成一个token并返回给界面，此时只需要传入token一个参数服务端即可完成注销
+     */
+    logout(token: string): Observable<HttpResult<any>>;
+
+    /**
+     * 修改密码
+     * 处于安全，session不会保存用户的密码，因此修改密码时需要传入原始密码，服务端需要对原始密码和token进行验证
+     * 服务端成功后不用返回data
+     */
+    changePassword(data: { token: string, oldPassword: string, newPassword: string }): Observable<HttpResult<any>>;
 }
 ```
 http远程调用返回angular的Observable异步对象（建议大家也采用此方式）
-
+Ï
 其中的HttpResult和Session是系统定义的数据格式：
 ```js 
 export class HttpResult<T> {

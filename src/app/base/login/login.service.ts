@@ -2,9 +2,11 @@ import { Observable } from "rxjs/Observable";
 import { Session } from '../shared/model/session';
 import { HttpResult } from '../shared/model/http-result';
 
-/**登录服务 */
+/**预定义服务 */
 export interface LoginService {
-    //登录
+    /**
+     * 登录
+     */
     login(loginData: { login: string, password: string }): Observable<HttpResult<Session>>;
 
     /**
