@@ -10,6 +10,6 @@ export interface Menu {
 export interface Session {
     userCode: string;
     userName: string;
-    token?: string;
+    token: string;
     menus: Array<Menu>;
 }

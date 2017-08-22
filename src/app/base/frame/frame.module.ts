@@ -7,6 +7,7 @@ import { ContentsModules } from "app/config/contents-modules";
 import { HeadUserComponent } from "app/base/shared/heard/head-user.component";
 import { HeadComponent } from "app/base/shared/heard/head.component";
 import { MenuComponent } from "app/base/shared/menu/menu.component";
+import { LoginServiceImpl } from "app/providers/login.service-impl";
 
 @NgModule({
     imports: [
@@ -24,7 +25,7 @@ import { MenuComponent } from "app/base/shared/menu/menu.component";
     ],
 
     exports: [FrameComponent],
-    providers: []
+    providers: [LoginServiceImpl]
 })
 export class FrameModule {
 }

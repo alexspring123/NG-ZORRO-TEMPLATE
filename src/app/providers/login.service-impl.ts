@@ -8,9 +8,15 @@ import { HttpResult } from "app/base/shared/model/http-result";
 @Injectable()
 export class LoginServiceImpl implements LoginService {
 
-    login(logData: { login: string; password: string; }): Observable<HttpResult<Session>> {
+    login(loginData: { login: string; password: string; }): Observable<HttpResult<Session>> {
         return new Observable(observer => {
             observer.next(this.getDemoSession());
+        });
+    }
+
+    logout(token: string): Observable<HttpResult<any>> {
+        return new Observable(observer => {
+            observer.next(new HttpResult<any>(0, 'OK', null));
         });
     }
 
