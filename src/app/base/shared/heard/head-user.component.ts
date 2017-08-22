@@ -15,10 +15,10 @@ import { Router } from "@angular/router";
             <ul nz-menu>
                 <li nz-menu-item [nzDisable]="true">个人资料</li>
                 <li nz-menu-item>
-                    <a target="_blank" rel="noopener noreferrer" href="#">修改密码</a>
+                    <a (click)="changePassword()">修改密码</a>
                 </li>
                 <li nz-menu-divider></li>
-                <li nz-menu-item><a (click)="logout()">注销</a></li>
+                <li nz-menu-item><a (click)="logout()">安全退出</a></li>
             </ul>
         </nz-dropdown>
     `,
@@ -52,7 +52,11 @@ export class HeadUserComponent implements OnInit {
         });
     }
 
-    doLogout(): void {
+    changePassword(): void {
+        this.router.navigateByUrl('/frame/changePwd');
+    }
+
+    private doLogout(): void {
         this.loginService.logout(this.session.token).subscribe(
             (result: HttpResult<any>) => {
                 if (result.code != 0) {

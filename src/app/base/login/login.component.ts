@@ -41,9 +41,8 @@ export class LoginComponent implements OnInit {
     }
 
     submitForm() {
-        for (const i in this.validateForm.controls) {
-            this.validateForm.controls[i].markAsDirty();
-        }
+        if (this.validateForm.invalid)
+            return;
 
         this.loginService.login({ login: this.userName, password: this.password }).subscribe(
             (result: HttpResult<Session>) => {

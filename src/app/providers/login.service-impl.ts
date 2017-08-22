@@ -20,6 +20,12 @@ export class LoginServiceImpl implements LoginService {
         });
     }
 
+    changePassword(data: { token: string; oldPassword: string; newPassword: string; }): Observable<HttpResult<any>> {
+        return new Observable(observer => {
+            observer.next(new HttpResult<any>(0, 'OK', null));
+        });
+    }
+
     private getDemoSession(): HttpResult<Session> {
         let result: HttpResult<Session> = {
             code: 0,
