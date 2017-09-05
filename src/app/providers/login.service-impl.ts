@@ -85,6 +85,11 @@ export class LoginServiceImpl implements LoginService {
                             { title: "应付款管理", path: "", subMenus: [] },
                         ]
                     }
+                ],
+                permissions: [
+                    { code: '/role/view', name: '角色查看权' },
+                    { code: '/role/edit', name: '角色编辑权' },
+                    { code: '/role/delete', name: '角色删除权' }
                 ]
 
             }

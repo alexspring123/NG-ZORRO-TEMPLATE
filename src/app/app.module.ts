@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginModule } from "app/base/login/login.module";
 import { appRoutes } from "app/app.routing";
 import { FrameModule } from "app/base/frame/frame.module";
+import { PermissionGurid } from "app/permission.gurid";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { FrameModule } from "app/base/frame/frame.module";
     LoginModule,
     FrameModule
   ],
-  providers: [],
+  providers: [PermissionGurid],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
