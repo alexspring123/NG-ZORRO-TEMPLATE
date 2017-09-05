@@ -1,7 +1,7 @@
 # NG-ZORRO-TEMPLATE
 NG-ZORRO-TEMPLATE是基于阿里angular组件[NG-ZORRO](https://ng.ant.design/#/docs/angular/introduce)开发的一套企业后台管理系统模板。目的是简单、方便、快速的搭建一个企业后台管理系统。
 
-模板项目提供了登录页面、动态菜单、session存储等功能，您只需要开发对应的后台服务，即可实现一个简单的后台管理系统；
+模板项目提供了登录页面、动态菜单、session存储、权限路由守卫等功能，您只需要开发对应的后台服务，即可实现一个简单的后台管理系统；
 
 为了方便大家在没有后台服务时也能使用，项目提供了一些fake和demo，可以直接使用。
 
@@ -104,16 +104,57 @@ export interface Menu {
     subMenus: Array<Menu>; //子菜单
 }
 
+//权限
+export interface Permission {
+    code: string; //权限代码
+    name: string; //权限名称
+}
+
 /**登录后返回的Session */
 export interface Session {
     userCode: string;
     userName: string;
     token?: string;
     menus: Array<Menu>;
+    permissions: Array<Permission>;
 }
 ```
 上面只是解释了登录用到的接口和数据结果，实际开发中大家只需要替换/src/app/providers/login.service-impl.ts文件的实现即可
 > **特别注意：**  此文件名称和位置不能更改
+
+# 设置浏览器标题
+模板提供了为每个路由页面单独设置浏览器标题的功能。  
+设置方法：在路由定义中增加data参数，并在其中定义title属性，例如
+```typescript
+export const RoleRoutes: Route[] = [
+    {
+        path: 'role', component: RoleComponent, data: { title: '角色' },
+        children: [
+            { path: 'list', component: RoleListComponent, data: { title: '角色列表', permission: ['/role1/view'] } },
+        ]
+    },
+];
+```
+当路由导航到 *role/list* 页面时，浏览器标题显示为：**智能照明管理系统-角色列表**  
+其中“智能照明管理系统”全局选项app_title的值  
+如果某个路由未设置data['title']属性，那么浏览器标题默认为app_title的值
+
+# 给路由添加权限守卫
+管理系统一般会根据用户权限来控制能够进入某个模块，通常做法是编写一个路由守卫，然后添加到路由定义中；
+为了方便大家试用，模板提供了默认的路由权限守卫[PermissionGurid](./src/app/permission.gurid.ts)，大家只需要在路由定义中增加data参数，并配置permission字段即可，例如
+```typescript
+export const RoleRoutes: Route[] = [
+    { path: 'role', redirectTo: '/frame/role/list', pathMatch: 'full' },
+    {
+        path: 'role', component: RoleComponent, data: { title: '角色' },
+        children: [
+            { path: 'list', component: RoleListComponent, data: { title: '角色列表', permission: ['/role/view'] } },
+        ]
+    },
+];
+```
+permission字段是一个字符串数组，可以配置多个权限，目前实现的功能为，只要用户包含其中一个权限，守卫即放行，而不是同时具有所有权限。  
+如果用户没有permission中定义的任一个权限，那么系统将不跳转，并且谈框提示缺少权限。
 
 # 目录说明
 模板项目的目录结构定义为
