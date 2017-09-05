@@ -5,6 +5,19 @@ NG-ZORRO-TEMPLATE是基于阿里angular组件[NG-ZORRO](https://ng.ant.design/#/
 
 为了方便大家在没有后台服务时也能使用，项目提供了一些fake和demo，可以直接使用。
 
+# 目录
+* [安装运行](#安装运行)
+* [配置说明](#us配置说明age)
+    * [系统配置](#系统配置)
+    * [登录页面配置](#登录页面配置)
+    * [菜单配置](#菜单配置)
+    * [本地存储配置](#本地存储配置)
+* [对接自己后台登录服务](#对接自己后台登录服务)
+* [设置浏览器标题](#设置浏览器标题)
+* [给路由添加权限守卫](#给路由添加权限守卫)
+* [目录说明](#目录说明)
+* [升级模板说明](#升级模板说明)
+
 # 安装运行
 ## 准备工作
 - 安装git
@@ -141,7 +154,7 @@ export const RoleRoutes: Route[] = [
 
 # 给路由添加权限守卫
 管理系统一般会根据用户权限来控制能够进入某个模块，通常做法是编写一个路由守卫，然后添加到路由定义中；
-为了方便大家试用，模板提供了默认的路由权限守卫[PermissionGurid](./src/app/permission.gurid.ts)，大家只需要在路由定义中增加data参数，并配置permission字段即可，例如
+为了方便大家使用，模板提供了默认的路由权限守卫[PermissionGurid](./src/app/permission.gurid.ts)，大家只需要在路由定义中增加data参数，并配置permission字段即可，例如
 ```typescript
 export const RoleRoutes: Route[] = [
     { path: 'role', redirectTo: '/frame/role/list', pathMatch: 'full' },
