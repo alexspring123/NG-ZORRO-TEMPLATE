@@ -210,9 +210,26 @@ ng build -prod -aot
 ```
 ng build -prod -aot -bh /subDir/
 ```
-*其中subDir是apache中的目录名称*  
-将编译结果/dist目录中的文件直接复制到apache的subDir目录(linux上的默认目录为/var/www/html/subDir)  
-启动apache，打开浏览器访问：http://IP:端口/subDir，你会发现界面并没有出来，还需要对apache进行配置 
+**其中subDir是apache中的目录名称，你可以替换成你自己的目录名称**  
+将编译结果/dist目录中的文件直接复制到apache的subDir目录(linux上的默认目录为/var/www/html/subDir)
+
+配置项目目录
+打开apache的配置文件，ubuntu上是/etc/apache2/apache2.conf，添加如下代码
+```
+<Directory /subDir>
+        Options FollowSymLinks
+        AllowOverride all
+        allow from all
+</Directory>
+```
+启动apache，打开浏览器访问：http://IP:端口/subDir 可以正常访问
+
+## 解决浏览器刷新问题
+上面部署可以正常访问，但是刷新浏览器时会报错
+> The requested URL /***** was not found on this server
+原因是，正常访问时url被angular接管，[浏览器并没有向服务器发送请求](https://angular.cn/guide/router#附录：locationstrategy以及浏览器url样式)。当刷新浏览器时，由浏览器接管url，会向服务端发送请求。而服务器上并没有人处理，从而报Not found错误。  
+要解决这个问题，我们只需要让服务器处理这个请求即可，下面以ubuntu上的apache为例。
+
 ### 打开apache的路径重写功能
 激活mod_rewrite模块
 ```
@@ -222,9 +239,18 @@ sudo a2enmod rewrite
 ```
 sudo systemctl restart apache2
 ```
-
-### 配置项目目录并开启路径重写 
-打开apache的配置文件，ubuntu上是/etc/apache2/apache2.conf，添加如下代码
+### 打开apache目录的重写开关
+修改/etc/apache2/apache2.conf文件  
+如果部署在根目录，找到下面的配置
+```
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+</Directory>
+```
+将其中 *AllowOverride None* 改为 **AllowOverride all**，如果没有就增加一条。  
+如果部署在子目录subDir中，找到下面的配置
 ```
 <Directory /subDir>
         Options FollowSymLinks
@@ -232,9 +258,21 @@ sudo systemctl restart apache2
         allow from all
 </Directory>
 ```
-其中关键是AllowOverride参数，必须设置为all，表示此目录下允许路径重写  
+将其中 *AllowOverride None* 改为 **AllowOverride all**，如果没有就增加一条。  
 
-在subDir目录下添加.htaccess文件（主要文件名必须是.htaccess）,内容为
+### 增加.htaccess配置
+如果部署在根目录，在/var/www/html/下新建.htaccess文件，内容为
+```
+RewriteEngine On
+# If an existing asset or directory is requested go to it as it is
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+RewriteRule ^ - [L]
+
+# If the requested resource doesn't exist, use index.html
+RewriteRule ^ /index.html
+```
+如果部署在子目录/var/www/html/subDir中，则在subDir目录中新增.htaccess文件，内容为
 ```
 RewriteEngine On
 # If an existing asset or directory is requested go to it as it is
