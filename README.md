@@ -17,6 +17,7 @@ NG-ZORRO-TEMPLATE是基于阿里angular组件[NG-ZORRO](https://ng.ant.design/#/
 * [给路由添加权限守卫](#给路由添加权限守卫)
 * [目录说明](#目录说明)
 * [升级模板说明](#升级模板说明)
+* [部署说明](#部署说明)
 
 # 安装运行
 ## 准备工作
@@ -192,6 +193,59 @@ permission字段是一个字符串数组，可以配置多个权限，目前实�
 
 - 比对并合并如下文件
 > /src/config/global-config.ts
+
+# 部署说明
+开发调试好后需要部署到服务器上运行，我这里仅介绍apache的部署方式（其他如Nginx，IIS等类似）  
+## 部署在服务器根目录
+编译制品
+```
+ng build -prod -aot
+```
+将编译结果/dist目录中的文件直接复制到apache的根目录(linux上的默认目录为/var/www/html)  
+启动apache，打开浏览器访问http://IP:端口，就可以看到你的项目界面了
+
+## 部署在服务器的子目录
+比如想将项目部署到apache的subDir子目录中  
+编译制品
+```
+ng build -prod -aot -bh /subDir/
+```
+*其中subDir是apache中的目录名称*  
+将编译结果/dist目录中的文件直接复制到apache的subDir目录(linux上的默认目录为/var/www/html/subDir)  
+启动apache，打开浏览器访问：http://IP:端口/subDir，你会发现界面并没有出来，还需要对apache进行配置 
+### 打开apache的路径重写功能
+激活mod_rewrite模块
+```
+sudo a2enmod rewrite
+```
+重新apache生效
+```
+sudo systemctl restart apache2
+```
+
+### 配置项目目录并开启路径重写 
+打开apache的配置文件，ubuntu上是/etc/apache2/apache2.conf，添加如下代码
+```
+<Directory /subDir>
+        Options FollowSymLinks
+        AllowOverride all
+        allow from all
+</Directory>
+```
+其中关键是AllowOverride参数，必须设置为all，表示此目录下允许路径重写  
+
+在subDir目录下添加.htaccess文件（主要文件名必须是.htaccess）,内容为
+```
+RewriteEngine On
+# If an existing asset or directory is requested go to it as it is
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+RewriteRule ^ - [L]
+
+# If the requested resource doesn't exist, use index.html
+RewriteRule ^ /subDir/index.html
+```
+
 
 
 
