@@ -283,7 +283,6 @@ RewriteRule ^ - [L]
 # If the requested resource doesn't exist, use index.html
 RewriteRule ^ /subDir/index.html
 ```
-
-
+*修改.htaccess文件不需要重启apache*
 
 
