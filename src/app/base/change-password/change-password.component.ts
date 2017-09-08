@@ -31,6 +31,12 @@ export class ChangePasswordComponent implements OnInit {
     });
   }
 
+  updateConfirmValidator() {
+    setTimeout(_ => {
+      this.validateForm.controls['checkPassword'].updateValueAndValidity();
+    });
+  }
+
   confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
       return { required: true };
