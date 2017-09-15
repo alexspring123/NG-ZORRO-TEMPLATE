@@ -208,7 +208,7 @@ ng build -prod -aot
 比如想将项目部署到apache的subDir子目录中  
 编译制品
 ```
-ng build -prod -aot -bh /subDir/
+ng build -prod -aot -bh /subDir/ -d /subDir
 ```
 **其中subDir是apache中的目录名称，你可以替换成你自己的目录名称**  
 将编译结果/dist目录中的文件直接复制到apache的subDir目录(linux上的默认目录为/var/www/html/subDir)
