@@ -21,11 +21,20 @@ NG-ZORRO-TEMPLATE是基于阿里angular组件[NG-ZORRO](https://ng.ant.design/#/
 * [部署说明](#部署说明)
 
 # 截图
-<img src="doc/screen-snapshots/login-snapshot.png" width="200">
-<img src="doc/screen-snapshots/top-memu-snapshot.png" width="200">
-<img src="doc/screen-snapshots/left-menu-snapshot.png" width="200">
-<img src="doc/screen-snapshots/left-menu-snapshot2.png" width="200">
-<img src="doc/screen-snapshots/change-pwd.png" width="200">
+<table>
+<tr>
+    <td><img src="doc/screen-snapshots/login-snapshot.png" width="300"></td>
+    <td><img src="doc/screen-snapshots/top-memu-snapshot.png" width="300"></td>
+</tr>
+<tr>
+    <td><img src="doc/screen-snapshots/left-menu-snapshot.png" width="300"></td>
+    <td><img src="doc/screen-snapshots/left-menu-snapshot2.png" width="300"></td>
+</tr>
+<tr>
+    <td><img src="doc/screen-snapshots/change-pwd.png" width="300"></td>
+    <td></td>
+</tr>
+</table>
 
 # 安装运行
 ## 准备工作
