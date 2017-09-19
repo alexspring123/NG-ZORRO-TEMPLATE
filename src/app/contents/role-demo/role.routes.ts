@@ -8,7 +8,7 @@ export const RoleRoutes: Route[] = [
     {
         path: 'role', component: RoleComponent, data: { title: '角色' },
         children: [
-            { path: 'list', component: RoleListComponent, data: { title: '角色列表', permission: ['/role/view'] } },
+            { path: 'list', component: RoleListComponent, data: { title: '角色列表', permission: ['/role/view1'] } },
         ]
     },
 ];
