@@ -9,11 +9,11 @@
 
     <ul nz-menu *ngIf="showMenu" [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
         <div style="float:left" *ngFor="let menu of session.menus">
-            <li nz-menu-item *ngIf="menu.subMenus.length ==0 " (click)="goPage(menu.path)">
+            <li nz-menu-item *ngIf="!menu.subMenus || menu.subMenus.length ==0 " (click)="goPage(menu.path)">
                 <i *ngIf="menu.icon" class="anticon" [ngClass]="'anticon-'+menu.icon"></i>{{menu.title}}
             </li>
 
-            <li nz-submenu *ngIf="menu.subMenus.length>0">
+            <li nz-submenu *ngIf="menu.subMenus && menu.subMenus.length>0">
                 <span title><i *ngIf="menu.icon" class="anticon" [ngClass]="'anticon-'+menu.icon"></i>{{menu.title}}</span>
                 <ul>
                     <li nz-menu-item *ngFor="let subMenu of menu.subMenus" (click)="goPage(subMenu.path)">
