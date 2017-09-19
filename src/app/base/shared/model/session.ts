@@ -3,7 +3,7 @@ export interface Menu {
     title: string;//菜单标题
     path: string;//路由路径
     icon?: string; //图片
-    subMenus: Array<Menu>; //子菜单
+    subMenus?: Array<Menu>; //子菜单
 }
 
 //权限
