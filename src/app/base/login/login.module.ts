@@ -6,20 +6,19 @@ import { NgZorroAntdModule } from "ng-zorro-antd";
 import { CommonModule } from "@angular/common";
 import { LoginServiceImpl } from "app/providers/login.service-impl";
 import { SessionService } from "app/base/shared/session.service";
+import { LoginRoutingModule } from "app/base/login/login-routing.module";
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        NgZorroAntdModule
+        NgZorroAntdModule,
+        LoginRoutingModule
     ],
     declarations: [LoginComponent],
-
     exports: [LoginComponent],
-
-    providers: [LoginServiceImpl,
-        SessionService]
+    providers: [LoginServiceImpl, SessionService]
 })
 export class LoginModule {
 }

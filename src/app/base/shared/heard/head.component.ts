@@ -31,6 +31,6 @@ export class HeadComponent implements OnInit {
     }
 
     public goPage(path: string): void {
-        this.router.navigateByUrl('/frame' + path);
+        this.router.navigateByUrl(path);
     }
 }

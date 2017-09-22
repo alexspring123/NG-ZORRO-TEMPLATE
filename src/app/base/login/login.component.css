@@ -1,8 +1,6 @@
 .login{
     height: 100%;
     background-size: cover;
-    /* background-image: url("../../../assets/imgs/login_bk.jpg"); */
-
     display: flex;
     justify-content: center;
     align-items: center;

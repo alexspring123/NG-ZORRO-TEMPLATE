@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
     backgroundImage: string = loginConfig.background_image;
     formTitle: string = loginConfig.form_title;
 
-
     validateForm: FormGroup;
 
     userName: string;

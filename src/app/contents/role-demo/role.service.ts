@@ -6,7 +6,6 @@ import { Role } from "app/contents/role-demo/role";
 import { Page } from "app/base/shared/model/page";
 import { HttpResult } from "app/base/shared/model/http-result";
 
-
 @Injectable()
 export class RoleService {
     constructor() {

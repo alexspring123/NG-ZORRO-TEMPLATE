@@ -7,10 +7,7 @@ class RoleFilter {
 
 @Component({
     selector: 'app-role',
-    template: `
-        <router-outlet></router-outlet>
-    `,
-    styleUrls: []
+    template: '<router-outlet></router-outlet>'
 })
 export class RoleComponent implements OnInit {
 

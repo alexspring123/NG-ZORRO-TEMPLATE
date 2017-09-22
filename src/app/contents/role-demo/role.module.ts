@@ -7,6 +7,7 @@ import { RoleComponent } from "app/contents/role-demo/role.component";
 import { RoleListComponent } from "app/contents/role-demo/list/role-list.component";
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RoleRoutingModule } from "app/contents/role-demo/role-routing.module";
 
 @NgModule({
     imports: [
@@ -15,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         FormsModule,
         ReactiveFormsModule,
         NgZorroAntdModule,
+        RoleRoutingModule
     ],
     declarations: [
         RoleComponent,

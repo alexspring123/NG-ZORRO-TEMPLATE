@@ -7,11 +7,9 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
-
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: '<router-outlet></router-outlet>'
 })
 export class AppComponent implements OnInit {
 
@@ -54,6 +52,7 @@ export class AppComponent implements OnInit {
     });
   }
 
+  // 给指定路由添加权限守卫
   private addPermissionGurid(route: Route): void {
     //只有配置了permisson的路由才增加权限守卫
     if (route.data && route.data['permission']) {

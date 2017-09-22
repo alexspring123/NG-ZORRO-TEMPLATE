@@ -5,9 +5,9 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginModule } from "app/base/login/login.module";
-import { appRoutes } from "app/app.routing";
 import { FrameModule } from "app/base/frame/frame.module";
 import { PermissionGurid } from "app/permission.gurid";
+import { AppRoutingModule } from 'app/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -18,8 +18,7 @@ import { PermissionGurid } from "app/permission.gurid";
     RouterModule,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot(),
-
-    RouterModule.forRoot(appRoutes),
+    AppRoutingModule,
     LoginModule,
     FrameModule
   ],
