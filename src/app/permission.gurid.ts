@@ -22,7 +22,6 @@ export class PermissionGurid implements CanActivate {
                 title: '缺少权限',
                 content: '缺少权限：' + pCodes.join(',')
             });
-            // window.alert();
         }
         return success;
     }

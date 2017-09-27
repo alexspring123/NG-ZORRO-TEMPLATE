@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title) {
-
   }
 
   ngOnInit() {

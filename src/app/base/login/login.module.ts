@@ -18,7 +18,7 @@ import { LoginRoutingModule } from "app/base/login/login-routing.module";
     ],
     declarations: [LoginComponent],
     exports: [LoginComponent],
-    providers: [LoginServiceImpl, SessionService]
+    providers: [LoginServiceImpl]
 })
 export class LoginModule {
 }

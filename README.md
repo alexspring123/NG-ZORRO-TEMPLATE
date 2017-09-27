@@ -19,6 +19,7 @@ NG-ZORRO-TEMPLATE是基于阿里angular组件[NG-ZORRO](https://ng.ant.design/#/
 * [设置浏览器标题](#设置浏览器标题)
 * [给路由添加权限守卫](#给路由添加权限守卫)
 * [目录说明](#目录说明)
+* [自定义模块注册](#自定义模块注册)
 * [升级模板说明](#升级模板说明)
 * [部署说明](#部署说明)
 
@@ -199,6 +200,18 @@ permission字段是一个字符串数组，可以配置多个权限，目前实�
 /src/app/providers/ | 可以修改，但是不能删除 | 存放模板定义好的接口实现，用户可以修改实现，但是不能修改文件名、类名和实现的接口
 /src/app/contents/ | 可以任何修改 | 存放用户自己的模块代码，可以任意修改
 /src/app/config/ | 可以修改，但是不能删除 | 存放用户模块和路由的注册文件
+
+# 自定义模块注册
+自定义的模块通过在/src/app/config/contents-modules.ts中注册。  
+```typescript
+//客户自定的模块注册
+export const ContentsRoutes: Route[] = [
+    { path: '', loadChildren: getRoleModule },
+];
+
+export function getRoleModule(): any { return RoleModule; }
+```
+由于整个模板使用了异步路由，因此新增的模块不再需要在其他模块中import，仅需要在此配置中增加一行异步路由即可；
 
 # 升级模板说明
 - 下载最新的项目文件
