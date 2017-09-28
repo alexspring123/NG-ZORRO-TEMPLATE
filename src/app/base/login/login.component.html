@@ -2,23 +2,23 @@
     <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
         <div nz-form-item class="login-form-title">{{formTitle}}</div>
         <div nz-form-item>
-            <div nz-form-control [nzValidateStatus]="validateForm.controls.userName">
-                <nz-input formControlName="userName" [ngModel]="userName" [nzPlaceHolder]="'用户名'" [nzSize]="'large'">
+            <div nz-form-control [nzValidateStatus]="validateForm.get('userName')">
+                <nz-input formControlName="userName" [nzPlaceHolder]="'用户名'" [nzSize]="'large'">
                     <ng-template #prefix>
                         <i class="anticon anticon-user"></i>
                     </ng-template>
                 </nz-input>
-                <div nz-form-explain *ngIf="validateForm.controls.userName.dirty&&validateForm.controls.userName.hasError('required')">用户名不能为空</div>
+                <div nz-form-explain *ngIf="formErrors['userName']">{{formErrors['userName']}}</div>
             </div>
         </div>
         <div nz-form-item>
-            <div nz-form-control [nzValidateStatus]="validateForm.controls.password">
+            <div nz-form-control [nzValidateStatus]="validateForm.get('password')">
                 <nz-input formControlName="password" [ngModel]="password" [nzType]="'password'" [nzPlaceHolder]="'密码'" [nzSize]="'large'">
                     <ng-template #prefix>
                         <i class="anticon anticon-lock"></i>
                     </ng-template>
                 </nz-input>
-                <div nz-form-explain *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('required')">密码不能为空</div>
+                <div nz-form-explain *ngIf="formErrors['password']">{{formErrors['password']}}</div>
             </div>
         </div>
         <div nz-form-item>

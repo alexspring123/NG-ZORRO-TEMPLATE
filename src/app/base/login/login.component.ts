@@ -7,7 +7,7 @@ import { loginConfig } from "config/global-config";
 import { SessionService } from "app/base/shared/session.service";
 import { Session } from "app/base/shared/model/session";
 import { HttpResult } from "app/base/shared/model/http-result";
-
+import { FormUtil } from "app/base/shared/form-util";
 
 @Component({
     moduleId: module.id,
@@ -15,15 +15,21 @@ import { HttpResult } from "app/base/shared/model/http-result";
     styleUrls: ['login.component.css'],
     templateUrl: 'login.component.html'
 })
-
 export class LoginComponent implements OnInit {
+    formErrors = {
+        'userName': '',
+        'password': '',
+    };
+
+    validationMessages = {
+        'userName': { 'required': '代码不能为空' },
+        'password': { 'required': '名称不能为空' }
+    };
+
     backgroundImage: string = loginConfig.background_image;
     formTitle: string = loginConfig.form_title;
 
     validateForm: FormGroup;
-
-    userName: string;
-    password: string;
 
     constructor(private fb: FormBuilder,
         private router: Router,
@@ -35,16 +41,25 @@ export class LoginComponent implements OnInit {
         this.validateForm = this.fb.group({
             userName: [null, [Validators.required]],
             password: [null, [Validators.required]],
-            remember: [true],
         });
+
+        this.validateForm.valueChanges.subscribe((value) => this.checkForm());
+    }
+
+    private checkForm(): void {
+        FormUtil.valid(this.validateForm, this.formErrors, this.validationMessages);
     }
 
     submitForm() {
-        if (this.validateForm.invalid)
+        if (this.validateForm.invalid) {
+            FormUtil.markAsDirtyDeep(this.validateForm);
+            this.checkForm();
             return;
+        }
 
-        this.loginService.login({ login: this.userName, password: this.password }).subscribe(
+        this.loginService.login({ login: this.validateForm.get('userName').value, password: this.validateForm.get('password').value }).subscribe(
             (result: HttpResult<Session>) => {
+                console.log(result);
                 if (result.code != 0) {
                     window.alert('登录失败：' + result.message);
                     return;
