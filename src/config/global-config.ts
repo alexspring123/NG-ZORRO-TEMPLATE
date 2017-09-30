@@ -14,6 +14,9 @@ export const menuConfig = {
     placement: 'top'
 }
 
+// 版权配置
+export const copyright: string = '智能照明管理系统 ©2017 Implement By Alex'
+
 //session配置
 export const sessionConfig = {
     // session在浏览器的storerage中的存储key

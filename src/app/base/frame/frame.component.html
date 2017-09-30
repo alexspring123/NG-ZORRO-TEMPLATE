@@ -8,6 +8,7 @@
 
     <nz-layout style="padding:0 24px 24px">
       <router-outlet></router-outlet>
+      <nz-footer style="text-align: center;" *ngIf="copyright">{{copyright}}</nz-footer>
     </nz-layout>
   </nz-layout>
 </nz-layout>

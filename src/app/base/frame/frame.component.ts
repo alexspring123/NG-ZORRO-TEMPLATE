@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { menuConfig, loginConfig } from "config/global-config";
+import { menuConfig, loginConfig, copyright } from "config/global-config";
 
 @Component({
   selector: 'app-frame',
@@ -8,6 +8,7 @@ import { menuConfig, loginConfig } from "config/global-config";
 })
 export class FrameComponent implements OnInit {
   menuPlacement: string = 'top';
+  copyright: string;
   isCollapsed: boolean = false;
 
   constructor() {
@@ -22,5 +23,6 @@ export class FrameComponent implements OnInit {
       if (placement.trim().toLowerCase() == 'top')
         this.menuPlacement = 'top';
     }
+    this.copyright = copyright;
   }
 }
