@@ -30,6 +30,8 @@ export class LoginComponent implements OnInit {
     formTitle: string = loginConfig.form_title;
 
     validateForm: FormGroup;
+    userName: string;
+    password: string;
 
     constructor(private fb: FormBuilder,
         private router: Router,
@@ -39,8 +41,8 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.validateForm = this.fb.group({
-            userName: [null, [Validators.required]],
-            password: [null, [Validators.required]],
+            userName: [this.userName, [Validators.required]],
+            password: [this.password, [Validators.required]],
         });
 
         this.validateForm.valueChanges.subscribe((value) => this.checkForm());
