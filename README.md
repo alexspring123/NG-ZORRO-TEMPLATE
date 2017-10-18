@@ -19,6 +19,7 @@ NG-ZORRO-TEMPLATE是基于阿里angular组件[NG-ZORRO](https://ng.ant.design/#/
 * [对接自己后台登录服务](#对接自己后台登录服务)
 * [设置浏览器标题](#设置浏览器标题)
 * [给路由添加权限守卫](#给路由添加权限守卫)
+* [增加按钮权限控制](#增加按钮权限控制)
 * [目录说明](#目录说明)
 * [自定义模块注册](#自定义模块注册)
 * [升级模板说明](#升级模板说明)
@@ -191,6 +192,44 @@ export const RoleRoutes: Route[] = [
 ```
 permission字段是一个字符串数组，可以配置多个权限，目前实现的功能为，只要用户包含其中一个权限，守卫即放行，而不是同时具有所有权限。  
 如果用户没有permission中定义的任一个权限，那么系统将不跳转，并且谈框提示缺少权限。
+
+# 增加按钮权限控制
+在SessionService类中提供了
+```
+    hasPermission(permissionCode: string): boolean {
+        if (!permissionCode) return false;
+
+        let session = this.getSession();
+        return session ? session.permissions.some(p => p.code == permissionCode) : false;
+    }
+```
+因此在模块中仅需要调用此方法来判断是否具有权限，然后控制界面按钮是否可见
+```typescript
+    _canCreate = false;
+    _canEdit = false;
+    _canDelete = false;
+
+    constructor(private sessionService: SessionService,
+       ......) {
+    }
+
+    ngOnInit(): void {
+        this.refreshPermission();
+        this.search(true);
+    }
+
+    private refreshPermission(): void {
+        this._canCreate = this.sessionService.hasPermission('/role/create');
+        this._canEdit = this.sessionService.hasPermission('/role/edit');
+        this._canDelete = this.sessionService.hasPermission('/role/delete');
+    }
+```
+```html
+<button nz-button *ngIf="_canCreate" [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" routerLink="./create">
+            <i class="anticon anticon-plus"></i>
+            <span>添加角色</span>
+        </button>
+```
 
 # 目录说明
 模板项目的目录结构定义为
