@@ -13,6 +13,10 @@ import { RoleFilter, Role, RoleService } from "app/contents/role/role.service";
     styleUrls: ['role-list.component.css']
 })
 export class RoleListComponent implements OnInit {
+    _canCreate = false;
+    _canEdit = false;
+    _canDelete = false;
+
     _pageIndex: number = 1;
     _pageSize: number = 10;
     filter: RoleFilter = new RoleFilter();
@@ -29,7 +33,14 @@ export class RoleListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.refreshPermission();
         this.search(true);
+    }
+
+    private refreshPermission(): void {
+        this._canCreate = this.sessionService.hasPermission('/role/create');
+        this._canEdit = this.sessionService.hasPermission('/role/edit');
+        this._canDelete = this.sessionService.hasPermission('/role/delete');
     }
 
     resetForm(): void {

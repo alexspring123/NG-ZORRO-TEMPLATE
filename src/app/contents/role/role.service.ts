@@ -164,31 +164,13 @@ export interface CPermission extends Permission {
 
 export const AllPermissions: Array<CPermission> = [
     { menuCode: "0101", menuName: "角色", code: "/role/view", name: "查看权" },
-    { menuCode: "0101", menuName: "角色", code: "/role/add", name: "新建权" },
+    { menuCode: "0101", menuName: "角色", code: "/role/create", name: "新建权" },
+    { menuCode: "0101", menuName: "角色", code: "/role/edit", name: "修改权" },
     { menuCode: "0101", menuName: "角色", code: "/role/delete", name: "删除权" },
 
     { menuCode: "0102", menuName: "员工", code: "/user/view", name: "查看权" },
-    { menuCode: "0102", menuName: "员工", code: "/user/add", name: "新建权" },
+    { menuCode: "0102", menuName: "员工", code: "/user/create", name: "新建权" },
+    { menuCode: "0102", menuName: "员工", code: "/user/edit", name: "编辑权" },
     { menuCode: "0102", menuName: "员工", code: "/user/delete", name: "删除权" },
-
-    { menuCode: "0103", menuName: "店铺", code: "/shop/view", name: "查看权" },
-
-    { menuCode: "0104", menuName: "运营组", code: "/group/view", name: "查看权" },
-
-    { menuCode: "0105", menuName: "项目", code: "/project/view", name: "查看权" },
-    { menuCode: "0105", menuName: "项目", code: "/project/add", name: "新建权" },
-    { menuCode: "0105", menuName: "项目", code: "/project/modify", name: "修改权" },
-    { menuCode: "0105", menuName: "项目", code: "/project/delete", name: "删除权" },
-
-    { menuCode: "0106", menuName: "地理位置", code: "/location/view", name: "查看权" },
-    { menuCode: "0106", menuName: "地理位置", code: "/location/edit", name: "编辑权" },
-
-    { menuCode: "0107", menuName: "品牌", code: "/brand/view", name: "查看权" },
-    { menuCode: "0107", menuName: "品牌", code: "/brand/edit", name: "编辑权" },
-
-    { menuCode: "0201", menuName: "巡店计划", code: "/tourPlan/view", name: "查看权" },
-
-    { menuCode: "0202", menuName: "巡店单", code: "/tour/view", name: "查看权" },
-
-    { menuCode: "0301", menuName: "意向合同", code: "/contract/view", name: "查看权" },
+    { menuCode: "0102", menuName: "员工", code: "/user/resetPwd", name: "重置密码权" },
 ];

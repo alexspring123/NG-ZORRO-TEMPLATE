@@ -88,10 +88,16 @@ export class LoginServiceImpl implements LoginService {
                 ],
                 permissions: [
                     { code: '/role/view', name: '角色查看权' },
+                    { code: '/role/create', name: '角色新建权' },
                     { code: '/role/edit', name: '角色编辑权' },
-                    { code: '/role/delete', name: '角色删除权' }
-                ]
+                    { code: '/role/delete', name: '角色删除权' },
 
+                    { code: '/user/view', name: '用户查看权' },
+                    { code: '/user/create', name: '用户新建权' },
+                    { code: '/user/edit', name: '用户编辑权' },
+                    { code: '/user/delete', name: '用户删除权' },
+                    { code: "/user/resetPwd", name: "重置密码权" }
+                ]
             }
         };
         return result;

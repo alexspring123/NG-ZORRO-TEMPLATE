@@ -7,7 +7,7 @@
         </nz-breadcrumb>
     </div>
     <div nz-col [nzSpan]="6" style="text-align:right;">
-        <button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" routerLink="./create">
+        <button nz-button *ngIf="_canCreate" [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" routerLink="./create">
             <i class="anticon anticon-plus"></i>
             <span>添加角色</span>
         </button>
@@ -62,8 +62,8 @@
                         </td>
                         <td nz-td>{{role.remark}}</td>
                         <td nz-td>
-                            <a [routerLink]="['edit', role.name]">修改</a>&nbsp;
-                            <nz-popconfirm [nzTitle]="'确定要删除这个角色吗？'" (nzOnConfirm)="delete(role)">
+                            <a *ngIf="_canEdit" [routerLink]="['edit', role.name]">修改</a>&nbsp;
+                            <nz-popconfirm *ngIf="_canDelete" [nzTitle]="'确定要删除这个角色吗？'" (nzOnConfirm)="delete(role)">
                                 <a nz-popconfirm>删除</a>
                             </nz-popconfirm>
                         </td>
