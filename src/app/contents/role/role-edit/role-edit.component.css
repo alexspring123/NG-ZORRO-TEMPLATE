@@ -1,0 +1,6 @@
+:host ::ng-deep .ant-advanced-form {
+    padding: 24px;
+    background: #fbfbfb;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+  }

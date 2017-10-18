@@ -1,0 +1,98 @@
+<nz-breadcrumb style="margin:12px 0;">
+    <nz-breadcrumb-item>基本资料</nz-breadcrumb-item>
+    <nz-breadcrumb-item>用户</nz-breadcrumb-item>
+    <nz-breadcrumb-item>详情</nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<nz-content style="background:#fff; padding: 24px; min-height: 500px;">
+    <nz-spin [nzSpinning]="_deleting" [nzTip]="'正在删除用户...'">
+        <nz-spin [nzSpinning]="_loading" [nzTip]="'正在加载数据...'">
+            <nz-card [nzBordered]="false">
+                <ng-template #title>{{user.name}}</ng-template>
+                <ng-template #extra>
+                    <a [routerLink]="['../../']">返回</a>&nbsp;
+                    <a (click)="showResetPaswordModal()">重置密码</a>&nbsp;
+                    <a [routerLink]="['../../edit', user.code]">修改</a>&nbsp;
+                    <nz-popconfirm [nzTitle]="'确定要删除这个员工吗？'" (nzOnConfirm)="delete(user)">
+                        <a nz-popconfirm>删除</a>
+                    </nz-popconfirm>
+                </ng-template>
+                <ng-template #body>
+                    <div class="viewContent">
+                        <div nz-row [nzGutter]="8">
+                            <div nz-col [nzSpan]="2">代码:</div>
+                            <div nz-col [nzSpan]="10">{{user.code}}</div>
+                        </div>
+                        <div nz-row [nzGutter]="8">
+                            <div nz-col [nzSpan]="2">名称:</div>
+                            <div nz-col [nzSpan]="10">{{user.name}}</div>
+                        </div>
+                        <div nz-row [nzGutter]="8">
+                            <div nz-col [nzSpan]="2">手机:</div>
+                            <div nz-col [nzSpan]="10">{{user.mobile}}</div>
+                        </div>
+                        <div nz-row [nzGutter]="8">
+                            <div nz-col [nzSpan]="2">登录名:</div>
+                            <div nz-col [nzSpan]="10">{{user.login}}</div>
+                        </div>
+                        <div nz-row [nzGutter]="8">
+                            <div nz-col [nzSpan]="2">APP视图:</div>
+                            <div nz-col [nzSpan]="10">
+                                <label nz-checkbox [nzDisabled]="true" [ngModel]="user.hasOperateView">
+                                    <span [class.appView]="user.hasOperateView">楼管</span>
+                                </label>
+                                <label nz-checkbox [nzDisabled]="true" [ngModel]="user.hasPropertyView">
+                                    <span [class.appView]="user.hasPropertyView">物管</span>
+                                </label>
+                                <label nz-checkbox [nzDisabled]="true" [ngModel]="user.hasBrandView">
+                                    <span [class.appView]="user.hasBrandView">招商</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div nz-row [nzGutter]="8">
+                            <div nz-col [nzSpan]="2">说明:</div>
+                            <div nz-col [nzSpan]="10">{{user.remark}}</div>
+                        </div>
+                    </div>
+                </ng-template>
+            </nz-card>
+        </nz-spin>
+
+        <nz-spin [nzSpinning]="_roleLoading || _roleRemoving" [nzTip]="_roleLoading ? '正在加载数据...' : '正在移除角色...'">
+            <nz-card [nzBordered]="false">
+                <ng-template #title>拥有的角色</ng-template>
+                <ng-template #extra>
+                    <a (click)="showAddRoleModal()">添加角色</a>
+                </ng-template>
+                <ng-template #body>
+                    <div class="search-result-list">
+                        <nz-table #nzTable [nzAjaxData]="roles" [nzIsPagination]="false" [nzLoading]="_roleLoading" [nzSize]="'small'">
+                            <thead nz-thead>
+                                <tr>
+                                    <th nz-th>
+                                        <span>角色名称</span>
+                                    </th>
+                                    <th nz-th>
+                                        <span>所属项目</span>
+                                    </th>
+                                    <th nz-th>
+                                        <span>操作</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody nz-tbody>
+                                <tr nz-tbody-tr *ngFor="let role of nzTable.data">
+                                    <td nz-td>{{role.name}}</td>
+                                    <td nz-td>{{role.projectName}}</td>
+                                    <td nz-td>
+                                        <a (click)="removeRole(role)">删除</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </nz-table>
+                    </div>
+                </ng-template>
+            </nz-card>
+        </nz-spin>
+    </nz-spin>
+</nz-content>

@@ -1,0 +1,18 @@
+:host ::ng-deep .viewContent{
+    line-height: 3em;
+  }
+
+:host ::ng-deep .search-result-list {
+    border: 1px dashed #e9e9e9;
+    border-radius: 6px;
+    width: 60%;
+  }
+
+:host ::ng-deep  .permission-result-list{
+    border: 1px dashed #e9e9e9;
+    border-radius: 6px;
+  }
+
+:host ::ng-deep .permissionName{
+      color: rgba(0, 0, 0, 0.65);
+  }

@@ -1,0 +1,33 @@
+<div class="permission-result-list">
+    <nz-table #nzTable [nzAjaxData]="permissionGroups" [nzIsPagination]="false" [nzScroll]="{ y: 300 }" [nzSize]="'small'">
+        <thead nz-thead>
+            <tr>
+                <th nz-th>
+                    <span>模块</span>
+                </th>
+                <th nz-th>
+                    <span>权限</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let group of nzTable.data">
+                <td nz-td>{{group.menuName}}</td>
+                <td nz-td>
+                    <div nz-row [nzGutter]="8">
+                        <div nz-col [nzSpan]="6" *ngFor="let p of group.permissions">
+                            <label nz-checkbox [(ngModel)]="p.has">
+                                <span>{{p.permission.name}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>
+
+<div class="customize-footer">
+    <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="cancel($event)">取消</button>
+    <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="save()">保存</button>
+</div>

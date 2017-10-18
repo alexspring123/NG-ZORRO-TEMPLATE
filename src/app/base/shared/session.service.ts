@@ -35,4 +35,11 @@ export class SessionService {
         this.session = null;
         window.sessionStorage.removeItem(sessionConfig.store_key);
     }
+
+    hasPermission(permissionCode: string): boolean {
+        if (!permissionCode) return false;
+
+        let session = this.getSession();
+        return session ? session.permissions.some(p => p.code == permissionCode) : false;
+    }
 }

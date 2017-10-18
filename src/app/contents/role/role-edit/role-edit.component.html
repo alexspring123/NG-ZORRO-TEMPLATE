@@ -1,0 +1,39 @@
+<nz-breadcrumb style="margin:12px 0;">
+    <nz-breadcrumb-item>基本资料</nz-breadcrumb-item>
+    <nz-breadcrumb-item>角色</nz-breadcrumb-item>
+    <nz-breadcrumb-item>{{_isNew ? '新建':'修改'}}</nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<nz-content style="background:#fff; padding: 24px; min-height: 500px;">
+    <nz-spin [nzSpinning]="_loading" [nzTip]="'正在加载数据...'">
+        <form nz-form [nzType]="'horizontal'" [formGroup]="validateForm" (ngSubmit)="save()" class="ant-advanced-form">
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="3">
+                    <label nz-form-item-required>名称</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="10" [nzValidateStatus]="formErrors.name ? 'error':'success'">
+                    <nz-input formControlName="name" [nzDisabled]="!_isNew" [nzPlaceHolder]="'请输入名称，保存后不可更改，请谨慎填写'"></nz-input>
+                    <div nz-form-explain *ngIf="formErrors.name">{{formErrors.name}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="3">
+                    <label>说明</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="10" [nzValidateStatus]="formErrors.remark?'error':'success'">
+                    <nz-input formControlName="remark" [nzType]="'textarea'" [nzRows]="'4'"></nz-input>
+                    <div nz-form-explain *ngIf="formErrors.remark">{{formErrors.remark}}</div>
+                </div>
+            </div>
+
+            <div nz-form-item nz-row style="text-align:center;">
+                <div nz-form-control nz-col [nzSpan]="5" [nzOffset]="3">
+                    <button nz-button [nzSize]="'large'" type="reset" [routerLink]="_isNew? '../':'../../'">取消</button>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="5">
+                    <button nz-button [nzType]="'primary'" type="submit" [nzSize]="'large'" [disabled]="_saving">保存</button>
+                </div>
+            </div>
+        </form>
+    </nz-spin>
+</nz-content>

@@ -1,0 +1,100 @@
+<nz-breadcrumb style="margin:12px 0;">
+    <nz-breadcrumb-item>基本资料</nz-breadcrumb-item>
+    <nz-breadcrumb-item>角色</nz-breadcrumb-item>
+    <nz-breadcrumb-item>详情</nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<nz-content style="background:#fff; padding: 24px; min-height: 500px;">
+    <nz-spin [nzSpinning]="_deleting" [nzTip]="'正在删除数据...'">
+        <nz-card [nzBordered]="false">
+            <ng-template #title>{{role.name}}</ng-template>
+            <ng-template #extra>
+                <a [routerLink]="['../../']">返回</a>&nbsp;
+                <a [routerLink]="['../../edit/',role.name]">修改</a>&nbsp;
+                <nz-popconfirm [nzTitle]="'确定要删除这个角色吗？'" (nzOnConfirm)="delete(role)">
+                    <a nz-popconfirm>删除</a>
+                </nz-popconfirm>
+            </ng-template>
+            <ng-template #body>
+                <div class="viewContent">
+                    <div nz-row [nzGutter]="8">
+                        <div nz-col [nzSpan]="2">名称:</div>
+                        <div nz-col [nzSpan]="10">{{role.name}}</div>
+                    </div>
+                    <div nz-row [nzGutter]="8">
+                        <div nz-col [nzSpan]="2">所属项目:</div>
+                        <div nz-col [nzSpan]="10">{{role.projectName}}</div>
+                    </div>
+                    <div nz-row [nzGutter]="8">
+                        <div nz-col [nzSpan]="2">说明:</div>
+                        <div nz-col [nzSpan]="10">{{role.remark}}</div>
+                    </div>
+                </div>
+            </ng-template>
+        </nz-card>
+
+
+        <nz-card [nzBordered]="false">
+            <ng-template #title>包含的用户</ng-template>
+            <ng-template #body>
+                <div class="search-result-list">
+                    <nz-table #nzTable [nzAjaxData]="users" [nzIsPagination]="false" [nzLoading]="_loading_users" [nzSize]="'small'">
+                        <thead nz-thead>
+                            <tr>
+                                <th>
+                                    <span>员工代码</span>
+                                </th>
+                                <th>
+                                    <span>员工姓名</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody nz-tbody>
+                            <tr nz-tbody-tr *ngFor="let user of nzTable.data">
+                                <td>{{user.code}}</td>
+                                <td>{{user.name}}</td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+            </ng-template>
+        </nz-card>
+
+        <nz-card [nzBordered]="false">
+            <ng-template #title>拥有的权限</ng-template>
+            <ng-template #extra>
+                <a (click)="showPermissionEditModal()">修改权限</a>
+            </ng-template>
+            <ng-template #body>
+                <div class="permission-result-list">
+                    <nz-table #nzTable [nzAjaxData]="permissionGroups" [nzIsPagination]="false" [nzLoading]="_loading_permissions" [nzSize]="'small'">
+                        <thead nz-thead>
+                            <tr>
+                                <th nz-th>
+                                    <span>模块</span>
+                                </th>
+                                <th nz-th>
+                                    <span>权限</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody nz-tbody>
+                            <tr nz-tbody-tr *ngFor="let group of nzTable.data">
+                                <td nz-td>{{group.menuName}}</td>
+                                <td nz-td>
+                                    <div nz-row [nzGutter]="8">
+                                        <div nz-col [nzSpan]="6" *ngFor="let p of group.permissions">
+                                            <label nz-checkbox [nzDisabled]="true" [ngModel]="p.has">
+                                                <span [class.permissionName]="p.has">{{p.permission.name}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+            </ng-template>
+        </nz-card>
+    </nz-spin>
+</nz-content>

@@ -1,0 +1,4 @@
+:host ::ng-deep .error{
+    color: red;
+    padding-top: 7px;
+}

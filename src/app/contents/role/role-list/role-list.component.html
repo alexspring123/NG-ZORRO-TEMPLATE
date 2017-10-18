@@ -1,0 +1,75 @@
+<div nz-row style="margin:12px 0;">
+    <div nz-col [nzSpan]="18">
+        <nz-breadcrumb>
+            <nz-breadcrumb-item>基础管理</nz-breadcrumb-item>
+            <nz-breadcrumb-item>角色</nz-breadcrumb-item>
+            <nz-breadcrumb-item>列表</nz-breadcrumb-item>
+        </nz-breadcrumb>
+    </div>
+    <div nz-col [nzSpan]="6" style="text-align:right;">
+        <button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" routerLink="./create">
+            <i class="anticon anticon-plus"></i>
+            <span>添加角色</span>
+        </button>
+    </div>
+</div>
+
+<nz-content style="background:#fff; padding: 24px; min-height: 500px;">
+    <form nz-form class="ant-advanced-search-form">
+        <!-- 第一行 -->
+        <div nz-row [nzGutter]="40">
+            <div nz-col [nzSpan]="8">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="5">
+                        <label [attr.for]="'name'">名称</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="19">
+                        <nz-input [nzSize]="'large'" [nzPlaceHolder]="'名称包含'" name="name" [(ngModel)]="filter.nameLk" [nzId]="'name'"></nz-input>
+                    </div>
+                </div>
+            </div>
+            <div nz-col [nzSpan]="8">
+                <div nz-col [nzSpan]="24" style="text-align: right;">
+                    <button nz-button [nzType]="'primary'" (click)="search(true)">查询</button>
+                    <button nz-button (click)="resetForm()">重置</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="search-result-list">
+        <nz-spin [nzSpinning]="_deleting" [nzTip]="'正在删除数据...'">
+            <nz-table #nzTable [nzAjaxData]="page.content" [(nzPageIndex)]="_pageIndex" [(nzPageSize)]="_pageSize" [nzTotal]="page.totalElements"
+                [nzLoading]="_loading" [nzShowSizeChanger]="true" [nzShowQuickJumper]="true" [nzShowTotal]="'true'" [nzSize]="'middle'"
+                (nzPageIndexChange)="search()" (nzPageSizeChange)="search(true)">
+                <thead nz-thead>
+                    <tr>
+                        <th nz-th>
+                            <span>名称</span>
+                        </th>
+                        <th nz-th>
+                            <span>备注</span>
+                        </th>
+                        <th nz-th>
+                            <span>操作</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let role of nzTable.data">
+                        <td nz-td>
+                            <a [routerLink]="['view', role.name]">{{role.name}}</a>
+                        </td>
+                        <td nz-td>{{role.remark}}</td>
+                        <td nz-td>
+                            <a [routerLink]="['edit', role.name]">修改</a>&nbsp;
+                            <nz-popconfirm [nzTitle]="'确定要删除这个角色吗？'" (nzOnConfirm)="delete(role)">
+                                <a nz-popconfirm>删除</a>
+                            </nz-popconfirm>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </nz-spin>
+    </div>
+</nz-content>

@@ -45,8 +45,8 @@ export class LoginServiceImpl implements LoginService {
                         title: "基本资料",
                         path: "",
                         subMenus: [
-                            { title: "角色", path: "/role", icon: "user", subMenus: [] },
-                            { title: "员工", path: "", subMenus: [] },
+                            { title: "角色", path: "/basic/role", icon: "user", subMenus: [] },
+                            { title: "员工", path: "/basic/user", subMenus: [] },
                             { title: "商品", path: "", subMenus: [] },
                             { title: "门店", path: "", subMenus: [] },
                         ]

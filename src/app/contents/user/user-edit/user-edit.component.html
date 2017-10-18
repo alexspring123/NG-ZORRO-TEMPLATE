@@ -1,0 +1,78 @@
+<nz-breadcrumb style="margin:12px 0;">
+    <nz-breadcrumb-item>基本资料</nz-breadcrumb-item>
+    <nz-breadcrumb-item>用户</nz-breadcrumb-item>
+    <nz-breadcrumb-item>{{_isNew ? '新建':'修改'}}</nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<nz-content style="background:#fff; padding: 24px; min-height: 500px;">
+    <nz-spin [nzSpinning]="_loading || _saving" [nzTip]="_loading ? '正在加载数据...':'正在保存...'">
+        <form nz-form [nzType]="'horizontal'" [formGroup]="validateForm" (ngSubmit)="save()" class="ant-advanced-form">
+            <div nz-form-item nz-row *ngIf="!_isNew">
+                <div nz-form-label nz-col [nzSpan]="3">
+                    <label>代码</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="10">{{user.code}}</div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="3">
+                    <label nz-form-item-required>名称</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="10" [nzValidateStatus]="formErrors.name ? 'error':'success'">
+                    <nz-input formControlName="name" [nzPlaceHolder]="'请输入名称'"></nz-input>
+                    <div nz-form-explain *ngIf="formErrors.name">{{formErrors.name}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="3">
+                    <label>手机号码</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="10" [nzValidateStatus]="formErrors.mobile ? 'error':'success'">
+                    <nz-input formControlName="mobile" [nzPlaceHolder]="'请输入手机号码'"></nz-input>
+                    <div nz-form-explain *ngIf="formErrors.mobile">{{formErrors.mobile}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="3">
+                    <label nz-form-item-required>登录名</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="10" [nzValidateStatus]="formErrors.login ? 'error':'success'">
+                    <nz-input formControlName="login" [nzPlaceHolder]="'请输入登录名'"></nz-input>
+                    <div nz-form-explain *ngIf="formErrors.login">{{formErrors.login}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="3">
+                    <label>APP视图</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="10">
+                    <label nz-checkbox formControlName="hasOperateView">
+                        <span>楼管</span>
+                    </label>
+                    <label nz-checkbox formControlName="hasPropertyView">
+                        <span>物管</span>
+                    </label>
+                    <label nz-checkbox formControlName="hasBrandView">
+                        <span>招商</span>
+                    </label>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="3">
+                    <label>说明</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="10" [nzValidateStatus]="formErrors.remark?'error':'success'">
+                    <nz-input formControlName="remark" [nzType]="'textarea'" [nzRows]="'4'"></nz-input>
+                    <div nz-form-explain *ngIf="formErrors.remark">{{formErrors.remark}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row style="text-align:center;">
+                <div nz-form-control nz-col [nzSpan]="5" [nzOffset]="3">
+                    <button nz-button [nzSize]="'large'" type="reset" (click)="cancel()">取消</button>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="5">
+                    <button nz-button [nzType]="'primary'" type="submit" [nzSize]="'large'" [disabled]="_saving">保存</button>
+                </div>
+            </div>
+        </form>
+    </nz-spin>
+</nz-content>
