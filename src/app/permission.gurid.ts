@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild } from "@angular/router";
 import { SessionService } from "app/base/shared/session.service";
 import { NzModalService } from "ng-zorro-antd";
 
 //路由权限守卫
 @Injectable()
-export class PermissionGurid implements CanActivate {
+export class PermissionGurid implements CanActivate, CanActivateChild {
     constructor(private sessionService: SessionService,
         private confirmServ: NzModalService) { }
 
@@ -24,5 +24,9 @@ export class PermissionGurid implements CanActivate {
             });
         }
         return success;
+    }
+
+    canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        return this.canActivate(route, state);
     }
 }

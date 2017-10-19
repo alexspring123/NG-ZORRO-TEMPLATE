@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.addTitle();
-    this.addPermissionGurids();
   }
 
   //动态修改窗口标题（从路由的data['title']读取，如果路由没有配置data或title属性，默认取app_title）
@@ -42,25 +41,5 @@ export class AppComponent implements OnInit {
         else
           return this.titleService.setTitle(app_title);
       });
-  }
-
-  // 动态增加权限守卫
-  private addPermissionGurids(): void {
-    this.router.config.forEach(route => {
-      this.addPermissionGurid(route);
-    });
-  }
-
-  // 给指定路由添加权限守卫
-  private addPermissionGurid(route: Route): void {
-    //只有配置了permisson的路由才增加权限守卫
-    if (route.data && route.data['permission']) {
-      if (!route.canActivate) route.canActivate = [];
-      route.canActivate.push(PermissionGurid);
-    }
-
-    //存在下级路由，继续添加守卫
-    if (route.children)
-      route.children.forEach(r => this.addPermissionGurid(r));
   }
 }
