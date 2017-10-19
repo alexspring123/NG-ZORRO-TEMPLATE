@@ -61,7 +61,6 @@ export class LoginComponent implements OnInit {
 
         this.loginService.login({ login: this.validateForm.get('userName').value, password: this.validateForm.get('password').value }).subscribe(
             (result: HttpResult<Session>) => {
-                console.log(result);
                 if (result.code != 0) {
                     window.alert('登录失败：' + result.message);
                     return;
