@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd, Route } from "@angular/router";
 import { Title } from "@angular/platform-browser";
 import { app_title } from "config/global-config";
-import { PermissionGurid } from "app/permission.gurid";
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
