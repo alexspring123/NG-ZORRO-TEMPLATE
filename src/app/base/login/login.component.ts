@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
     userName: string;
     password: string;
 
+    _logining = false;
+
     constructor(private fb: FormBuilder,
         private router: Router,
         private sessionService: SessionService,
@@ -62,8 +64,10 @@ export class LoginComponent implements OnInit {
             login: this.validateForm.get('userName').value,
             password: this.validateForm.get('password').value
         };
+        this._logining = true;
         this.loginService.login(loginData).subscribe(
-            (result: HttpResult<Session>) => {
+            result => {
+                this._logining = false;
                 if (result.code !== 0) {
                     window.alert('登录失败：' + result.message);
                     return;
@@ -73,6 +77,9 @@ export class LoginComponent implements OnInit {
                 // 跳转页面
                 this.router.navigateByUrl('/frame');
             },
-            (error: any) => window.alert(error));
+            (error: any) => {
+                this._logining = false;
+                window.alert(error);
+            });
     }
 }
