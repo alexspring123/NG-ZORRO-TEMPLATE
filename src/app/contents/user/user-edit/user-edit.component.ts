@@ -1,16 +1,16 @@
-import { Location } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute, Params } from "@angular/router";
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { SessionService } from "app/base/shared/session.service";
-import { NzMessageService } from "ng-zorro-antd";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { FormUtil } from "app/base/shared/form-util";
-import { User, UserService } from "app/contents/user/user.service";
+import { SessionService } from 'app/base/shared/session.service';
+import { NzMessageService } from 'ng-zorro-antd';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormUtil } from 'app/base/shared/form-util';
+import { User, UserService } from 'app/contents/user/user.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'cmall-user-edit',
+    selector: 'app-cmall-user-edit',
     styleUrls: ['user-edit.component.css'],
     templateUrl: 'user-edit.component.html'
 })
@@ -38,9 +38,9 @@ export class UserEditComponent implements OnInit {
     validateForm: FormGroup = new FormGroup({});
     user: User = new User();
 
-    _isNew: boolean = true;
-    _loading: boolean = false;
-    _saving: boolean = false;
+    _isNew = true;
+    _loading = false;
+    _saving = false;
 
     constructor(
         private fb: FormBuilder,
@@ -55,7 +55,7 @@ export class UserEditComponent implements OnInit {
     ngOnInit(): void {
         this.buildForm();
         this.route.params.forEach((params: Params) => {
-            let code = params["code"];
+            const code = params['code'];
             if (code) {
                 this._isNew = false;
                 this.load(code);
@@ -98,12 +98,12 @@ export class UserEditComponent implements OnInit {
         this.userService.save(this.user).subscribe(
             result => {
                 this._saving = false;
-                if (result.code != 0) {
+                if (result.code !== 0) {
                     this.messageService.error('保存用户失败：' + result.message);
                     return;
                 }
                 this.messageService.success('保存成功');
-                this.router.navigate(["/frame/basic/user/view", result.data]);
+                this.router.navigate(['/frame/basic/user/view', result.data]);
             },
             error => {
                 this._saving = false;
@@ -117,7 +117,7 @@ export class UserEditComponent implements OnInit {
         this.userService.getUser(code).subscribe(
             result => {
                 this._loading = false;
-                if (result.code != 0) {
+                if (result.code !== 0) {
                     this.messageService.error('加载用户失败：' + result.message);
                     return;
                 }
@@ -130,5 +130,4 @@ export class UserEditComponent implements OnInit {
             }
         );
     }
-
 }

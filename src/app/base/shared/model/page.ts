@@ -1,9 +1,9 @@
 export class Page<T> {
-    totalPages: number = 0;
-    totalElements: number = 0;
-    pageNumber: number = 0;
-    pageSize: number = 10;
-    hasContent: boolean = false;
-    hasNext: boolean = false;
+    totalPages = 0;
+    totalElements = 0;
+    pageNumber = 0;
+    pageSize = 10;
+    hasContent = false;
+    hasNext = false;
     content: Array<T> = [];
 }

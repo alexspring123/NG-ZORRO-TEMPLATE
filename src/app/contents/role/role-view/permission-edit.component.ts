@@ -1,11 +1,11 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input } from '@angular/core';
 import { PermissionGroup } from './permission-group';
-import { NzModalSubject, NzMessageService } from "ng-zorro-antd";
-import { Role, RoleService } from "app/contents/role/role.service";
+import { NzModalSubject, NzMessageService } from 'ng-zorro-antd';
+import { Role, RoleService } from 'app/contents/role/role.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'cmallpermis-rolesion-edit',
+    selector: 'app-cmall-role-permission-edit',
     styleUrls: ['permission-edit.component.css'],
     templateUrl: 'permission-edit.component.html'
 })
@@ -16,7 +16,7 @@ export class PermissionEditComponent {
     @Input()
     permissionGroups: Array<PermissionGroup> = [];
 
-    _saving: boolean = false;
+    _saving = false;
 
     constructor(private subject: NzModalSubject,
         private messageService: NzMessageService,
@@ -30,22 +30,23 @@ export class PermissionEditComponent {
     save() {
         this._saving = true;
 
-        let permissionCodes: Set<string> = new Set();
+        const permissionCodes: Set<string> = new Set();
         this.permissionGroups.forEach(g => {
             g.permissions.forEach(p => {
-                if (p.has)
+                if (p.has) {
                     permissionCodes.add(p.permission.code);
+                }
             });
         });
 
         this.roleService.coverRolePermissions(this.role.name, permissionCodes).subscribe(
             result => {
                 this._saving = false;
-                if (result.code != 0) {
+                if (result.code !== 0) {
                     this.messageService.error('保存角色权限失败：' + result.message);
                     return;
                 }
-                this.subject.next("OK");
+                this.subject.next('OK');
             },
             error => {
                 this._saving = false;

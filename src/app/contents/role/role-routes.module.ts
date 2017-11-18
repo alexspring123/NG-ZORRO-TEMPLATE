@@ -1,9 +1,9 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { RoleListComponent } from "./role-list/role-list.component";
-import { RoleEditComponent } from "app/contents/role/role-edit/role-edit.component";
-import { RoleViewComponent } from "app/contents/role/role-view/role-view.component";
+import { RoleListComponent } from './role-list/role-list.component';
+import { RoleEditComponent } from 'app/contents/role/role-edit/role-edit.component';
+import { RoleViewComponent } from 'app/contents/role/role-view/role-view.component';
 
 const routes: Routes = [
     {

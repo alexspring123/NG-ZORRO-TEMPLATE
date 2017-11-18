@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { NzModalSubject, NzMessageService } from "ng-zorro-antd";
-import { Page } from "app/base/shared/model/page";
-import { User, UserRole, UserService } from "app/contents/user/user.service";
-import { RoleFilter, RoleService } from "app/contents/role/role.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { NzModalSubject, NzMessageService } from 'ng-zorro-antd';
+import { Page } from 'app/base/shared/model/page';
+import { User, UserRole, UserService } from 'app/contents/user/user.service';
+import { RoleFilter, RoleService } from 'app/contents/role/role.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'cmall-user-role-edit',
+    selector: 'app-cmall-user-role-edit',
     styleUrls: ['user-role-edit.component.css'],
     templateUrl: 'user-role-edit.component.html'
 })
@@ -20,11 +20,11 @@ export class UserRoleEditComponent implements OnInit {
     _allChecked = false;
     _indeterminate = false;
 
-    _pageIndex: number = 1;
-    _pageSize: number = 5;
+    _pageIndex = 1;
+    _pageSize = 5;
 
-    _loading: boolean = false;
-    _saving: boolean = false;
+    _loading = false;
+    _saving = false;
 
     constructor(private subject: NzModalSubject,
         private messageService: NzMessageService,
@@ -41,8 +41,9 @@ export class UserRoleEditComponent implements OnInit {
     }
 
     search(reset: boolean = false) {
-        if (reset)
+        if (reset) {
             this._pageIndex = 1;
+        }
 
         this.filter.pageNumber = this._pageIndex - 1;
         this.filter.pageSize = this._pageSize;
@@ -51,7 +52,7 @@ export class UserRoleEditComponent implements OnInit {
         this.roleService.getList(this.filter).subscribe(
             result => {
                 this._loading = false;
-                if (result.code != 0) {
+                if (result.code !== 0) {
                     this.messageService.error('加载角色列表失败：' + result.message);
                     return;
                 }
@@ -82,7 +83,7 @@ export class UserRoleEditComponent implements OnInit {
 
     confirm() {
         this._saving = true;
-        let roles: Array<string> = [];
+        const roles: Array<string> = [];
         this.page.content.forEach(line => {
             if (line.checked) {
                 roles.push(line.name);
@@ -91,7 +92,7 @@ export class UserRoleEditComponent implements OnInit {
         this.userService.addRoles(this.user.code, roles).subscribe(
             result => {
                 this._saving = false;
-                if (result.code != 0) {
+                if (result.code !== 0) {
                     this.messageService.error('添加角色失败：' + result.message);
                     return;
                 }

@@ -1,12 +1,12 @@
-import { NgModule } from "@angular/core";
-import { LoginComponent } from "./login.component";
-import { LoginService } from "./login.service";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { NgZorroAntdModule } from "ng-zorro-antd";
-import { CommonModule } from "@angular/common";
-import { LoginServiceImpl } from "app/providers/login.service-impl";
-import { SessionService } from "app/base/shared/session.service";
-import { LoginRoutingModule } from "app/base/login/login-routing.module";
+import { NgModule } from '@angular/core';
+import { LoginComponent } from './login.component';
+import { LoginService } from './login.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { CommonModule } from '@angular/common';
+import { LoginServiceImpl } from 'app/providers/login.service-impl';
+import { SessionService } from 'app/base/shared/session.service';
+import { LoginRoutingModule } from 'app/base/login/login-routing.module';
 
 @NgModule({
     imports: [
@@ -20,5 +20,4 @@ import { LoginRoutingModule } from "app/base/login/login-routing.module";
     exports: [LoginComponent],
     providers: [LoginServiceImpl]
 })
-export class LoginModule {
-}
+export class LoginModule { }

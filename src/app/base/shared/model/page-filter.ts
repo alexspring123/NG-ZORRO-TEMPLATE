@@ -1,4 +1,4 @@
 export class PageFilter {
-    pageNumber: number = 0;
-    pageSize: number = 10;
+    pageNumber = 0;
+    pageSize = 10;
 }

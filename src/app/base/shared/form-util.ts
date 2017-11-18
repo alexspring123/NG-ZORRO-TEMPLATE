@@ -1,4 +1,4 @@
-import { AbstractControl, FormGroup, FormArray } from "@angular/forms";
+import { AbstractControl, FormGroup, FormArray } from '@angular/forms';
 
 /**
  * 表单工具类
@@ -8,19 +8,26 @@ export class FormUtil {
      * 设置指定控制器以及子控制器为dirty
      */
     public static markAsDirtyDeep(control: AbstractControl): void {
-        if (!control) return;
+        if (!control) {
+            return
+        };
 
         control.markAsDirty();
 
         if (control instanceof FormGroup) {
             const ctl = <FormGroup>control;
-            for (let inner in ctl.controls) {
-                this.markAsDirtyDeep(ctl.get(inner));
+            for (const inner in ctl.controls) {
+                if (inner) {
+                    this.markAsDirtyDeep(ctl.get(inner));
+                }
             }
         } else if (control instanceof FormArray) {
             const ctl = <FormArray>control;
-            for (let inner in ctl.controls)
-                this.markAsDirtyDeep(ctl.get(inner));
+            for (const inner in ctl.controls) {
+                if (inner) {
+                    this.markAsDirtyDeep(ctl.get(inner));
+                }
+            }
         }
     }
 
@@ -31,9 +38,14 @@ export class FormUtil {
      * validationMessages：表单检查项以及错误消息定义（数组特殊处理）
      */
     public static valid(form: FormGroup, formErrors: {}, validationMessages: {}): void {
-        if (!form) return;
-        for (const field in formErrors)
-            this.megerError(field, formErrors, form.get(field), validationMessages[field]);
+        if (!form) {
+            return
+        };
+        for (const field in formErrors) {
+            if (field) {
+                this.megerError(field, formErrors, form.get(field), validationMessages[field]);
+            }
+        }
     }
 
     /**
@@ -43,30 +55,36 @@ export class FormUtil {
    * messages：错误信息定义
    */
     private static megerError(field: any, errors: any, control: AbstractControl, messages: any): void {
-        if (!field || !control) return;
+        if (!field || !control) {
+            return
+        };
 
         // errors中对应field的内容是字符串，表示已经是叶子节点
-        if (typeof errors[field] === "string") {
+        if (typeof errors[field] === 'string') {
             errors[field] = '';
             if (control && !control.valid && (control.dirty || control.touched)) {
-                for (const key in control.errors)
-                    errors[field] += messages[key] + ' ';
+                for (const key in control.errors) {
+                    if (key) {
+                        errors[field] += messages[key] + ' ';
+                    }
+                }
             }
-        }
-        // errors中对应field的内容是数组，需要循环处理每一个原始，数组时messages不是数组，因此原样返回
-        else if (errors[field] instanceof Array) {
+        } else if (errors[field] instanceof Array) {// errors中对应field的内容是数组，需要循环处理每一个原始，数组时messages不是数组，因此原样返回
             const arr = <Array<any>>errors[field];
             arr.forEach((f, index) => {
-                // TODO 此处只考虑数组元素是对象，还需要增加string类型的判断  
+                // TODO 此处只考虑数组元素是对象，还需要增加string类型的判断
                 for (const ff in f) {
-                    this.megerError(ff, errors[field][index], control.get(index.toString()).get(ff), messages[ff]);
+                    if (ff) {
+                        this.megerError(ff, errors[field][index], control.get(index.toString()).get(ff), messages[ff]);
+                    }
                 }
             });
-        }
-        // errors中对应field的内容是对象，需要循环每一个字段
-        else {
-            for (const f in field)
-                this.megerError(f, errors, control.get(f), messages[f]);
+        } else {// errors中对应field的内容是对象，需要循环每一个字段
+            for (const f in field) {
+                if (f) {
+                    this.megerError(f, errors, control.get(f), messages[f]);
+                }
+            }
         }
     }
 }

@@ -1,11 +1,11 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
-import { Router } from "@angular/router";
-import { SessionService } from "app/base/shared/session.service";
-import { LoginServiceImpl } from "app/providers/login.service-impl";
-import { Session } from "app/base/shared/model/session";
-import { HttpResult } from "app/base/shared/model/http-result";
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SessionService } from 'app/base/shared/session.service';
+import { LoginServiceImpl } from 'app/providers/login.service-impl';
+import { Session } from 'app/base/shared/model/session';
+import { HttpResult } from 'app/base/shared/model/http-result';
 
 @Component({
   selector: 'app-change-password',
@@ -54,10 +54,11 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   _submitForm() {
-    if (this.validateForm.invalid)
+    if (this.validateForm.invalid) {
       return;
+    }
 
-    let session: Session = this.sessionService.getSession();
+    const session: Session = this.sessionService.getSession();
 
     this.loginService.changePassword(
       {
@@ -66,16 +67,15 @@ export class ChangePasswordComponent implements OnInit {
         newPassword: this.validateForm.controls['password'].value
       }).subscribe(
       (result: HttpResult<Session>) => {
-        if (result.code != 0) {
+        if (result.code !== 0) {
           window.alert('修改密码失败：' + result.message);
           return;
         }
-        //跳转页面
+        // 跳转页面
         window.alert('密码修改成功，请重新登录');
         this.router.navigateByUrl('/login');
       },
       (error: any) => window.alert(error));
 
   }
-
 }

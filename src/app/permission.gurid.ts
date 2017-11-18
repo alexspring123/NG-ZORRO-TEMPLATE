@@ -1,21 +1,23 @@
-import { Injectable } from "@angular/core";
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild } from "@angular/router";
-import { SessionService } from "app/base/shared/session.service";
-import { NzModalService } from "ng-zorro-antd";
+import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild } from '@angular/router';
+import { SessionService } from 'app/base/shared/session.service';
+import { NzModalService } from 'ng-zorro-antd';
 
-//路由权限守卫
+// 路由权限守卫
 @Injectable()
 export class PermissionGurid implements CanActivate, CanActivateChild {
     constructor(private sessionService: SessionService,
         private confirmServ: NzModalService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        let pCodes: string[] = route.data ? route.data['permission'] : null;
-        //路由未配置permission属性时直接返回true
-        if (!pCodes) return true;
+        const pCodes: string[] = route.data ? route.data['permission'] : null;
+        // 路由未配置permission属性时直接返回true
+        if (!pCodes) {
+            return true
+        };
 
-        let permissions = this.sessionService.getSession().permissions;
-        let success = permissions.some(p => pCodes.some(code => p.code == code));
+        const permissions = this.sessionService.getSession().permissions;
+        const success = permissions.some(p => pCodes.some(code => p.code === code));
 
         if (!success) {
             this.confirmServ.error({

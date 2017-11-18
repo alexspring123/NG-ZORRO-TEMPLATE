@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
-import { HttpResult } from "app/base/shared/model/http-result";
-import { Page } from "app/base/shared/model/page";
-import { Permission } from "app/base/shared/model/session";
-import { SessionService } from "app/base/shared/session.service";
+import { HttpResult } from 'app/base/shared/model/http-result';
+import { Page } from 'app/base/shared/model/page';
+import { Permission } from 'app/base/shared/model/session';
+import { SessionService } from 'app/base/shared/session.service';
 
 // 角色
 export class Role {
@@ -15,8 +15,8 @@ export class Role {
 // 查询条件
 export class RoleFilter {
     nameLk?: string;
-    pageNumber?: number = 0;
-    pageSize?: number = 10;
+    pageNumber = 0;
+    pageSize = 10;
 }
 
 // 角色用户
@@ -33,9 +33,10 @@ export class RoleService {
     constructor(private sessionService: SessionService) { }
 
     getList(filter: RoleFilter): Observable<HttpResult<Page<Role>>> {
-        let roles: Role[] = RoleData.filter(r => {
-            if (filter.nameLk != null && !r.name.includes(filter.nameLk))
+        const roles: Role[] = RoleData.filter(r => {
+            if (filter.nameLk != null && !r.name.includes(filter.nameLk)) {
                 return false;
+            }
             return true;
         });
 
@@ -45,18 +46,19 @@ export class RoleService {
     }
 
     getRole(name: string): Observable<HttpResult<Role>> {
-        let role = RoleData.find(r => name == r.name);
+        const role = RoleData.find(r => name === r.name);
         return new Observable(observer => {
             observer.next(new HttpResult(0, 'OK', role));
         });
     }
 
     saveRole(role: Role): Observable<HttpResult<null>> {
-        let duplicate = RoleData.find(r => name == r.name);
-        if (duplicate)
+        const duplicate = RoleData.find(r => name === r.name);
+        if (duplicate) {
             return new Observable(observer => {
                 observer.next(new HttpResult(-1, '已经存在名称为' + role.name + '的角色', null));
             });
+        }
         RoleData.push(role);
         return new Observable(observer => {
             observer.next(new HttpResult(0, 'OK', null));
@@ -64,18 +66,20 @@ export class RoleService {
     }
 
     saveModify(role: Role): Observable<HttpResult<null>> {
-        let exists = RoleData.find(r => name == r.name);
-        if (exists)
+        const exists = RoleData.find(r => name === r.name);
+        if (exists) {
             exists.remark = role.remark;
+        }
         return new Observable(observer => {
             observer.next(new HttpResult(0, 'OK', null));
         });
     }
 
     delete(name: string): Observable<HttpResult<null>> {
-        let index = RoleData.findIndex(r => name == r.name);
-        if (index >= 0)
+        const index = RoleData.findIndex(r => name === r.name);
+        if (index >= 0) {
             RoleData.splice(index, 1);
+        }
         return new Observable(observer => {
             observer.next(new HttpResult(0, 'OK', null));
         });
@@ -104,14 +108,14 @@ export class RoleService {
         pageSize = pageSize ? pageSize : 10;
         roles = roles ? roles : [];
 
-        let page: Page<Role> = new Page<Role>();
+        const page: Page<Role> = new Page<Role>();
         page.totalElements = roles.length;
         page.totalPages = Math.floor(roles.length / pageSize);
         page.pageNumber = pageNumber;
         page.pageSize = pageSize;
 
-        let startIndex = pageNumber * pageSize;
-        let endIndex = Math.min(startIndex + pageSize, roles.length);
+        const startIndex = pageNumber * pageSize;
+        const endIndex = Math.min(startIndex + pageSize, roles.length);
         page.content = roles.slice(startIndex, endIndex);
         page.hasContent = page.content.length > 0;
         page.hasNext = endIndex < roles.length;
@@ -163,14 +167,14 @@ export interface CPermission extends Permission {
 }
 
 export const AllPermissions: Array<CPermission> = [
-    { menuCode: "0101", menuName: "角色", code: "/role/view", name: "查看权" },
-    { menuCode: "0101", menuName: "角色", code: "/role/create", name: "新建权" },
-    { menuCode: "0101", menuName: "角色", code: "/role/edit", name: "修改权" },
-    { menuCode: "0101", menuName: "角色", code: "/role/delete", name: "删除权" },
+    { menuCode: '0101', menuName: '角色', code: '/role/view', name: '查看权' },
+    { menuCode: '0101', menuName: '角色', code: '/role/create', name: '新建权' },
+    { menuCode: '0101', menuName: '角色', code: '/role/edit', name: '修改权' },
+    { menuCode: '0101', menuName: '角色', code: '/role/delete', name: '删除权' },
 
-    { menuCode: "0102", menuName: "员工", code: "/user/view", name: "查看权" },
-    { menuCode: "0102", menuName: "员工", code: "/user/create", name: "新建权" },
-    { menuCode: "0102", menuName: "员工", code: "/user/edit", name: "编辑权" },
-    { menuCode: "0102", menuName: "员工", code: "/user/delete", name: "删除权" },
-    { menuCode: "0102", menuName: "员工", code: "/user/resetPwd", name: "重置密码权" },
+    { menuCode: '0102', menuName: '员工', code: '/user/view', name: '查看权' },
+    { menuCode: '0102', menuName: '员工', code: '/user/create', name: '新建权' },
+    { menuCode: '0102', menuName: '员工', code: '/user/edit', name: '编辑权' },
+    { menuCode: '0102', menuName: '员工', code: '/user/delete', name: '删除权' },
+    { menuCode: '0102', menuName: '员工', code: '/user/resetPwd', name: '重置密码权' },
 ];

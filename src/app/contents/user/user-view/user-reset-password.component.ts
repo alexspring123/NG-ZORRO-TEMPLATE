@@ -1,11 +1,11 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input } from '@angular/core';
 
-import { NzModalSubject, NzMessageService } from "ng-zorro-antd";
-import { User, UserService } from "app/contents/user/user.service";
+import { NzModalSubject, NzMessageService } from 'ng-zorro-antd';
+import { User, UserService } from 'app/contents/user/user.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'cmall-user-reset-password',
+    selector: 'app-cmall-user-reset-password',
     templateUrl: 'user-reset-password.component.html',
     styleUrls: ['user-reset-password.component.css']
 })
@@ -14,14 +14,14 @@ export class UserResetPasswordComponent {
     user: User = new User();
 
     password: string;
-    _saving: boolean = false;
+    _saving = false;
 
     constructor(private subject: NzModalSubject,
         private messageService: NzMessageService,
         private userService: UserService) { }
 
     cancel() {
-        this.subject.destroy("cancel");
+        this.subject.destroy('cancel');
     }
 
     confirm() {
@@ -29,12 +29,12 @@ export class UserResetPasswordComponent {
         this.userService.resetPassword(this.user.code, this.password).subscribe(
             result => {
                 this._saving = false;
-                if (result.code != 0) {
+                if (result.code !== 0) {
                     this.messageService.error('重置用户密码失败：' + result.message);
                     return;
                 }
                 this.messageService.success('重置用户成功');
-                this.subject.next("OK");
+                this.subject.next('OK');
             },
             error => {
                 this._saving = false;

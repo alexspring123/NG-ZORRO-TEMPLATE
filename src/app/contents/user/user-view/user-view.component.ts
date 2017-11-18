@@ -1,13 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Params, Router } from "@angular/router";
-import { NzModalService, NzMessageService } from "ng-zorro-antd";
-import { UserResetPasswordComponent } from "app/contents/user/user-view/user-reset-password.component";
-import { UserRoleEditComponent } from "app/contents/user/user-view/user-role-edit.component";
-import { User, UserService, UserRole } from "app/contents/user/user.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { NzModalService, NzMessageService } from 'ng-zorro-antd';
+import { UserResetPasswordComponent } from 'app/contents/user/user-view/user-reset-password.component';
+import { UserRoleEditComponent } from 'app/contents/user/user-view/user-role-edit.component';
+import { User, UserService, UserRole } from 'app/contents/user/user.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'cmall-user-view',
+    selector: 'app-cmall-user-view',
     styleUrls: ['user-view.component.css'],
     templateUrl: 'user-view.component.html'
 })
@@ -15,10 +15,10 @@ export class UserViewComponent implements OnInit {
     user: User = new User();
     roles: Array<UserRole> = [];
 
-    _loading: boolean = false;
-    _deleting: boolean = false;
-    _roleRemoving: boolean = false;
-    _roleLoading: boolean = false;
+    _loading = false;
+    _deleting = false;
+    _roleRemoving = false;
+    _roleLoading = false;
 
     constructor(private router: Router,
         private route: ActivatedRoute,
@@ -28,7 +28,7 @@ export class UserViewComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
-            let code = params["code"];
+            const code = params['code'];
             this.load(code);
             this.loadRoles(code);
         });
@@ -39,7 +39,7 @@ export class UserViewComponent implements OnInit {
         this.userService.getUser(code).subscribe(
             result => {
                 this._loading = false;
-                if (result.code != 0) {
+                if (result.code !== 0) {
                     this.messageService.error('加载用户失败：' + result.message);
                     return;
                 }
@@ -61,7 +61,7 @@ export class UserViewComponent implements OnInit {
         this.userService.getUserRoles(code).subscribe(
             result => {
                 this._roleLoading = false;
-                if (result.code != 0) {
+                if (result.code !== 0) {
                     this.messageService.error('加载用户角色列表失败：' + result.message);
                 }
                 this.roles = result.data;
@@ -78,7 +78,7 @@ export class UserViewComponent implements OnInit {
         this.userService.delete(user.code).subscribe(
             result => {
                 this._deleting = false;
-                if (result.code != 0) {
+                if (result.code !== 0) {
                     this.messageService.error('删除用户失败：' + result.message);
                     return;
                 }
@@ -105,7 +105,7 @@ export class UserViewComponent implements OnInit {
         this.userService.removeRole(this.user.code, role.name).subscribe(
             result => {
                 this._roleRemoving = false;
-                if (result.code != 0) {
+                if (result.code !== 0) {
                     this.messageService.error('删除用户角色失败：' + result.message);
                     return;
                 }
@@ -127,8 +127,9 @@ export class UserViewComponent implements OnInit {
         });
 
         subscription.subscribe(result => {
-            if (result == 'cancel' || result == 'OK')
+            if (result === 'cancel' || result === 'OK') {
                 subscription.destroy();
+            }
         });
     }
 
@@ -141,9 +142,9 @@ export class UserViewComponent implements OnInit {
         });
 
         subscription.subscribe(result => {
-            if (result == 'cancel')
+            if (result === 'cancel') {
                 subscription.destroy();
-            else if (result == 'OK') {
+            } else if (result === 'OK') {
                 subscription.destroy();
                 this.loadRoles(this.user.code);
             }

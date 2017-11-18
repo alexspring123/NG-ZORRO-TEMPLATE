@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { menuConfig } from "config/global-config";
-import { Router } from "@angular/router";
-import { Session } from "app/base/shared/model/session";
-import { SessionService } from "app/base/shared/session.service";
+import { menuConfig } from 'config/global-config';
+import { Router } from '@angular/router';
+import { Session } from 'app/base/shared/model/session';
+import { SessionService } from 'app/base/shared/session.service';
 
 @Component({
     selector: 'app-menu',

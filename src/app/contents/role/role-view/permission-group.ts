@@ -1,4 +1,4 @@
-import { Permission } from "app/base/shared/model/session";
+import { Permission } from 'app/base/shared/model/session';
 
 
 export class PermissionWithState {
@@ -23,8 +23,9 @@ export class PermissionGroup {
     }
 
     public appendPermission(permission: PermissionWithState) {
-        if (!this.permissions)
+        if (!this.permissions) {
             this.permissions = [];
+        }
         this.permissions.push(permission);
     }
 }

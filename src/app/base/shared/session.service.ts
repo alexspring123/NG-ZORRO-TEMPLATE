@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { sessionConfig } from "config/global-config";
-import { Session } from "app/base/shared/model/session";
+import { Injectable } from '@angular/core';
+import { sessionConfig } from 'config/global-config';
+import { Session } from 'app/base/shared/model/session';
 
 @Injectable()
 export class SessionService {
@@ -11,23 +11,26 @@ export class SessionService {
     }
 
     getUserCode(): string {
-        if (this.getSession())
+        if (this.getSession()) {
             return this.session.userCode;
-        else
+        } else {
             return null;
+        }
     }
 
     putSession(session: Session) {
         this.session = session;
-        if (this.session)
+        if (this.session) {
             window.sessionStorage.setItem(sessionConfig.store_key, JSON.stringify(session));
-        else
+        } else {
             window.sessionStorage.removeItem(sessionConfig.store_key);
+        }
     }
 
     getSession(): Session {
-        if (!this.session)
+        if (!this.session) {
             this.session = JSON.parse(window.sessionStorage.getItem(sessionConfig.store_key));
+        }
         return this.session;
     }
 
@@ -37,9 +40,11 @@ export class SessionService {
     }
 
     hasPermission(permissionCode: string): boolean {
-        if (!permissionCode) return false;
+        if (!permissionCode) {
+            return false
+        };
 
-        let session = this.getSession();
-        return session ? session.permissions.some(p => p.code == permissionCode) : false;
+        const session = this.getSession();
+        return session ? session.permissions.some(p => p.code === permissionCode) : false;
     }
 }

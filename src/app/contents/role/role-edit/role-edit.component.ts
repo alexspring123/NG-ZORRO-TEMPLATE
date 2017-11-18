@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute, Params } from "@angular/router";
-import { SessionService } from "app/base/shared/session.service";
-import { NzMessageService, NzModalService } from "ng-zorro-antd";
-import { Session } from "app/base/shared/model/session";
-import { FormGroup, FormBuilder, FormControl, Validators } from "@angular/forms";
-import { FormUtil } from "app/base/shared/form-util";
-import { Role, RoleService } from "app/contents/role/role.service";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { SessionService } from 'app/base/shared/session.service';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
+import { Session } from 'app/base/shared/model/session';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormUtil } from 'app/base/shared/form-util';
+import { Role, RoleService } from 'app/contents/role/role.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'cmall-role-edit',
+    selector: 'app-cmall-role-edit',
     templateUrl: 'role-edit.component.html',
     styleUrls: ['role-edit.component.css']
 })
@@ -29,9 +29,9 @@ export class RoleEditComponent implements OnInit {
     session: Session;
     validateForm: FormGroup = new FormGroup({});
     role: Role = new Role();
-    _isNew: boolean = true;
-    _loading: boolean = false;
-    _saving: boolean = false;
+    _isNew = true;
+    _loading = false;
+    _saving = false;
 
     constructor(private router: Router,
         private route: ActivatedRoute,
@@ -45,7 +45,7 @@ export class RoleEditComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
-            let name = params["name"];
+            const name = params['name'];
 
             this.buildForm();
             if (name) {
@@ -76,10 +76,11 @@ export class RoleEditComponent implements OnInit {
 
         this.role = this.validateForm.value;
 
-        if (this._isNew)
+        if (this._isNew) {
             this.doSaveNew(this.role);
-        else
+        } else {
             this.doSaveModify(this.role);
+        }
     }
 
     private doSaveNew(role: Role): void {
@@ -87,12 +88,12 @@ export class RoleEditComponent implements OnInit {
         this.roleService.saveRole(role).subscribe(
             result => {
                 this._saving = false;
-                if (result.code != 0) {
+                if (result.code !== 0) {
                     this.messageService.error('保存角色失败：' + result.message);
                     return;
                 }
                 this.messageService.error('保存成功');
-                this.router.navigate(["/frame/basic/role/view", role.name]);
+                this.router.navigate(['/frame/basic/role/view', role.name]);
             },
             error => {
                 this._saving = false;
@@ -105,7 +106,7 @@ export class RoleEditComponent implements OnInit {
         this.roleService.saveModify(role).subscribe(
             result => {
                 this._saving = false;
-                if (result.code != 0) {
+                if (result.code !== 0) {
                     this.messageService.error('修改角色失败：' + result.message);
                     return;
                 }
@@ -123,7 +124,7 @@ export class RoleEditComponent implements OnInit {
         this.roleService.getRole(name).subscribe(
             result => {
                 this._loading = false;
-                if (result.code != 0) {
+                if (result.code !== 0) {
                     this.messageService.error('加载角色失败：' + result.message);
                     return;
                 }
@@ -135,7 +136,7 @@ export class RoleEditComponent implements OnInit {
                         title: '加载角色失败',
                         content: '不存在角色' + name
                     });
-                    this.router.navigateByUrl("/frame/role");
+                    this.router.navigateByUrl('/frame/role');
                 }
             },
             error => {
@@ -143,6 +144,4 @@ export class RoleEditComponent implements OnInit {
                 this.messageService.error('执行失败：' + error);
             });
     }
-
-
 }
