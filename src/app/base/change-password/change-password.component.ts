@@ -43,7 +43,7 @@ export class ChangePasswordComponent implements OnInit {
     } else if (control.value !== this.validateForm.controls['password'].value) {
       return { confirm: true, error: true };
     }
-  };
+  }
 
   getFormControl(name) {
     return this.validateForm.controls[name];
