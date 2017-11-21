@@ -39,8 +39,8 @@ export class FormUtil {
      */
     public static valid(form: FormGroup, formErrors: {}, validationMessages: {}): void {
         if (!form) {
-            return
-        };
+            return;
+        }
         for (const field in formErrors) {
             if (field) {
                 this.megerError(field, formErrors, form.get(field), validationMessages[field]);
@@ -56,8 +56,8 @@ export class FormUtil {
    */
     private static megerError(field: any, errors: any, control: AbstractControl, messages: any): void {
         if (!field || !control) {
-            return
-        };
+            return;
+        }
 
         // errors中对应field的内容是字符串，表示已经是叶子节点
         if (typeof errors[field] === 'string') {

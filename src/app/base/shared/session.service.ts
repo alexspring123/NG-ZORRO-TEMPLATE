@@ -41,8 +41,8 @@ export class SessionService {
 
     hasPermission(permissionCode: string): boolean {
         if (!permissionCode) {
-            return false
-        };
+            return false;
+        }
 
         const session = this.getSession();
         return session ? session.permissions.some(p => p.code === permissionCode) : false;
