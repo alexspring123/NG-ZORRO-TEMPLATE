@@ -9,8 +9,8 @@ export class FormUtil {
      */
     public static markAsDirtyDeep(control: AbstractControl): void {
         if (!control) {
-            return
-        };
+            return;
+        }
 
         control.markAsDirty();
 
