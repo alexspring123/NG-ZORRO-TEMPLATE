@@ -68,18 +68,14 @@ export class LoginComponent implements OnInit {
         this.loginService.login(loginData).subscribe(
             result => {
                 this._logining = false;
-                if (result.code !== 0) {
-                    window.alert('登录失败：' + result.message);
-                    return;
-                }
                 // 加入本地缓存
-                this.sessionService.putSession(result.data);
+                this.sessionService.putSession(result);
                 // 跳转页面
                 this.router.navigateByUrl('/frame');
             },
-            (error: any) => {
+            error => {
                 this._logining = false;
-                window.alert(error);
+                window.alert('登录失败：' + error);
             });
     }
 }
