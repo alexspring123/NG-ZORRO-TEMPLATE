@@ -58,14 +58,10 @@ export class HeadUserComponent implements OnInit {
 
     private doLogout(): void {
         this.loginService.logout(this.session.token).subscribe(
-            (result: HttpResult<any>) => {
-                if (result.code !== 0) {
-                    window.alert('注销失败：' + result.message);
-                    return;
-                }
+            result => {
                 this.sessionService.removeSession();
                 this.router.navigateByUrl('/login');
             },
-            (error) => window.alert(error));
+            error => window.alert('注销失败：' + error));
     }
 }
