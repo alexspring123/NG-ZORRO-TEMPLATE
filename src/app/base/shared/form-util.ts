@@ -80,9 +80,9 @@ export class FormUtil {
                 }
             });
         } else {// errors中对应field的内容是对象，需要循环每一个字段
-            for (const f in field) {
+            for (const f in errors[field]) {
                 if (f) {
-                    this.megerError(f, errors, control.get(f), messages[f]);
+                    this.megerError(f, errors[field], control.get(f), messages[f]);
                 }
             }
         }
